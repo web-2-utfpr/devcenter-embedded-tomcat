@@ -27,17 +27,18 @@ instaclone/src/main/java/
           │             │         main.java
           │             │
           │             └─── servlets
-          │             |            UsuarioServlet.java
+          │             |            UserServlet.java
           │             │
-          │             └─── model
-          │             │   |
-          │             │   └───dao
-          │             │   |      UserDao.java
-          │             │   |
-          │             │   └───entities
-          |             |   |           User.java
-          |             |   |
-          │             │   └───services
+          │             └─ model
+          │             │      |
+          │             │      └───dao
+          │             │      |      UserDao.java
+          │             │      |      Connection.java
+          │             │      |
+          │             │      └───entities
+          |             |      |           User.java
+          |             |      |
+          │             │      └───services
                                       UserService.java
           │             │
           │             └─── controller
