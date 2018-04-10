@@ -16,7 +16,7 @@ This is a project developed in web 2 classes at UTFPR :)
 To start contributing, you can clone and use Netbeans to start the application on localhost.
 
 ```
-$ git clone https://github.com/web-2-utfpr/instaclone.git
+git clone https://github.com/web-2-utfpr/instaclone.git
 ```
 ## Project Structure
 
@@ -30,14 +30,18 @@ instaclone/src/main/java/
           │             |            UsuarioServlet.java
           │             │
           │             └─── model
+          │             │   |
+          │             │   └───dao
+          │             │   |      UserDao.java
+          │             │   |
           │             │   └───entities
-          |             |   |           Usuario.java
+          |             |   |           User.java
           |             |   |
           │             │   └───services
-                                      UsuarioService.java
+                                      UserService.java
           │             │
           │             └─── controller
-          │                          UsuarioController.java
+          │                          UserController.java
           │
           └───docs
           │       ddl.sql
