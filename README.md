@@ -1,24 +1,47 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-# Create a Java Web Application using Embedded Tomcat
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://instaclone.herokuapp.com)
+# Instaclone
 
-This tutorial will show you how to create a simple Java web application using embedded Tomcat.
+A Java Web Application using Embedded Tomcat
+This is a project developed in web 2 classes at UTFPR :)
 
-## Prerequisites
+## Requirements of the image publication application.
 
-* Basic Java knowledge, including an installed version of the JVM and Maven.
-* Basic Git knowledge, including an installed version of Git.
-* A Java web application. If you don't have one follow the first step to create an example. Otherwise skip that step.
+* login.
+* list the contents.
+* insert new contents.
+* search for contents.
 
-## Skip The Application Creation
+## Starting up
 
-If you want to skip the creation steps you can clone the finished sample and then skip to the 'Deploy Your Application to Heroku' section:
+To start contributing, you can clone and use Netbeans to start the application on localhost.
 
 ```
-$ git clone git@github.com:heroku/devcenter-embedded-tomcat.git
+$ git clone https://github.com/web-2-utfpr/instaclone.git
 ```
+## Project Structure
 
-## Follow the Guide
-
-If you would like to create the application yourself, then follow the Dev Center guide on how to [Create a Java Web Application using Embedded Tomcat](https://devcenter.heroku.com/articles/create-a-java-web-application-using-embedded-tomcat).
-
-
+```
+instaclone/src/main/java/
+          │             │
+          │             └───launch
+          │             │         main.java
+          │             │
+          │             └─── servlets
+          │             |            UsuarioServlet.java
+          │             │
+          │             └─── model
+          │             │   └───entities
+          |             |   |           Usuario.java
+          |             |   |
+          │             │   └───services
+                                      UsuarioService.java
+          │             │
+          │             └─── controller
+          │                          UsuarioController.java
+          │
+          └───docs
+          │       ddl.sql
+          │       der.png
+          │       diagrams...
+           README.md
+```
