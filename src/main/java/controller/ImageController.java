@@ -5,13 +5,13 @@
  */
 package controller;
 
-import dao.ImageDAO;
 import entities.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.ImageDAO;
 import service.ImageService;
 import service.imgur.Uploader;
 

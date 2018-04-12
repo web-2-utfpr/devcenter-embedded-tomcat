@@ -8,3 +8,5 @@ tomcat.5000
 
 
 *.bak
+*.lock
+

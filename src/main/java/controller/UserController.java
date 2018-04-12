@@ -5,10 +5,10 @@
  */
 package controller;
 
-import dao.UserDAO;
-import entities.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.UserDAO;
+import model.entities.User;
 
 /**
  *
