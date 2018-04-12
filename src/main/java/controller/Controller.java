@@ -23,8 +23,8 @@ public abstract class Controller {
         request = req;
         response = resp;
     }
-    
-    public void Dispatch(String page) throws ServletException, IOException{
+
+    public void Dispatch(String page) throws ServletException, IOException {
         request.getRequestDispatcher(page).forward(request, response);
     }
 }

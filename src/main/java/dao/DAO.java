@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author rafae
  */
-public abstract class AbstractDAO {
+public abstract class DAO {
 
     private static Connection currentCon = null;
     static ResultSet rs = null;
@@ -57,7 +57,7 @@ public abstract class AbstractDAO {
             currentCon = Conexao.GetConnection();
             stmt = currentCon.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         } catch (SQLException ex) {
-            Logger.getLogger(AbstractDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
