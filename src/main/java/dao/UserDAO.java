@@ -85,7 +85,6 @@ public class UserDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             user.seteValido(false);
-            return null;
         } finally {
             if (stmt != null) {
                 try {

@@ -17,5 +17,10 @@
             ${row.value}
             <br/><br/>
         </c:forEach>
+
+        <form action="image" method="POST">
+            <input type="url" name="url" required/>
+            <input type="submit" value="Postar"/>
+        </form>
     </body>
 </html>
