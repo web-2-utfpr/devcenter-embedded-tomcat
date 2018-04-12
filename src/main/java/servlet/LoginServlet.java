@@ -1,7 +1,6 @@
 package servlet;
 
-import dao.UserDAO;
-import entities.User;
+import controller.UserController;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet(
         name = "Login",
@@ -17,14 +15,18 @@ import javax.servlet.http.HttpSession;
 )
 public class LoginServlet extends HttpServlet {
 
+    UserController uc;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        if (req.getSession().getAttribute("loggedUser") == null) {
-           req.getRequestDispatcher("/login.jsp").forward(req, resp);
-        } else {
+        uc = new UserController(req, resp);
+
+        if (uc.estaLogado()) {
             resp.sendRedirect("image");
+        } else {
+            uc.Dispatch("/login.jsp");
         }
     }
 
@@ -32,21 +34,19 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        User user = new User();
-        user.setNome(req.getParameter("nome"));
-        user.setSenha(req.getParameter("senha"));
+        uc = new UserController(req, resp);
 
-        user = UserDAO.Login(user);
+        if (uc.estaLogado()) {
+            resp.sendRedirect("image ");
+            return;
+        }
 
-        if (user.eValido()) {
-            HttpSession session = req.getSession(true);
-            session.setAttribute("loggedUser", user);
+        if (uc.Login()) {
             resp.sendRedirect("image");
         } else {
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("login");
         }
-    }
 
-    
+    }
 
 }

@@ -12,25 +12,25 @@ import java.util.Date;
  * @author rafae
  */
 public class Image {
-    private int id;
-    private int id_usuario;
+    private long id;
+    private long id_usuario;
     private String url;
     private String path;
     private Date create_time;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId_usuario() {
+    public long getId_usuario() {
         return id_usuario;
     }
 
-    public void setId_usuario(int id_usuario) {
+    public void setId_usuario(long id_usuario) {
         this.id_usuario = id_usuario;
     }
 

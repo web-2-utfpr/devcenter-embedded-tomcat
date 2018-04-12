@@ -12,9 +12,9 @@
     <body>
         <h1>Welcome ${user.getNome()}</h1>
 
-        <c:forEach var="row" items="${images}">
-            <img src="${row.key}" width="400px"> <br/> 
-            ${row.value}
+        <c:forEach var="image" items="${images}">
+            <img src="${image.getUrl()}" width="400px"> <br/> 
+            ${image.getCreate_time()}
             <br/><br/>
         </c:forEach>
 

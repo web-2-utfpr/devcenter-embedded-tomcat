@@ -1,8 +1,9 @@
 package servlet;
 
+import controller.ImageController;
+import controller.UserController;
 import dao.ImageDAO;
 import entities.Image;
-import entities.User;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -17,44 +18,45 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class ImageServlet extends HttpServlet {
 
+    UserController uc;
+    ImageController ic;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        
-        User loggedUser = (User) req.getSession().getAttribute("loggedUser");
-        
-        if (loggedUser == null) {
+
+        uc = new UserController(req, resp);
+
+        if (!uc.estaLogado()) {
             resp.sendRedirect("login");
             return;
         }
-        
-        req.setAttribute("user", loggedUser);
-        req.setAttribute("images", ImageDAO.getPhotos(loggedUser));
-        req.getRequestDispatcher("/logged.jsp").forward(req, resp);
+
+        ic = new ImageController(req, resp);
+
+        req.setAttribute("user", uc.getLoggedUser());
+        req.setAttribute("images", ic.getByUserID(uc.getLoggedUser().getId()));
+
+        ic.Dispatch("/logged.jsp");
     }
-    
-     @Override
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        
-        User loggedUser = (User) req.getSession().getAttribute("loggedUser");
-        
-        if (loggedUser == null) {
+
+        uc = new UserController(req, resp);
+
+        if (!uc.estaLogado()) {
             resp.sendRedirect("login");
             return;
         }
+
+        ic = new ImageController(req, resp);
         
-        Image imagem = new Image();
-        
-        imagem.setId_usuario(loggedUser.getId());
-        imagem.setUrl(req.getParameter("url"));
-        imagem.setPath(req.getParameter("url"));
-        
-        ImageDAO.createImage(imagem);
-        
+        ic.create(uc.getLoggedUser().getId());
+
         resp.sendRedirect("image");
-        
-        
+
     }
 
 }
