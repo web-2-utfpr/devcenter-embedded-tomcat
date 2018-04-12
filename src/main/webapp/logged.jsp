@@ -18,8 +18,8 @@
             <br/><br/>
         </c:forEach>
 
-        <form action="image" method="POST">
-            <input type="url" name="url" required/>
+        <form action="image" method="POST" enctype="multipart/form-data">
+            <input type="file" name="imagem" />
             <input type="submit" value="Postar"/>
         </form>
     </body>
