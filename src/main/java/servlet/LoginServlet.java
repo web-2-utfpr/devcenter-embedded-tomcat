@@ -1,7 +1,7 @@
 package servlet;
 
-import dao.UserDAO;
-import entities.User;
+import model.dao.UserDAO;
+import model.entities.User;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
