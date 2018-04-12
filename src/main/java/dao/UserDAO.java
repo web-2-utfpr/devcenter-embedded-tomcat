@@ -25,14 +25,14 @@ public class UserDAO {
     public static User Login(User user) {
         String searchQuery = "SELECT * FROM usuario WHERE nome = ? AND senha = ?";
         PreparedStatement stmt = null;
-        
+
         try {
             currentCon = Conexao.GetConnection();
             stmt = currentCon.prepareStatement(searchQuery);
             stmt.setString(1, user.getNome());
             stmt.setString(2, user.getSenha());
             rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 user.setId(rs.getInt("id"));
                 user.seteValido(true);
             } else {
@@ -56,18 +56,57 @@ public class UserDAO {
                     stmt = null;
                 }
             }
-            
+
             if (currentCon != null) {
                 try {
                     currentCon.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 currentCon = null;
             }
-            
+
         }
+        return user;
+    }
+
+    public static User Register(User user) {
+        String searchQuery = "INSERT INTO usuario (`nome`, `senha`, `email`) VALUES (?, ?, ?)";
+        PreparedStatement stmt = null;
+
+        try {
+            currentCon = Conexao.GetConnection();
+            stmt = currentCon.prepareStatement(searchQuery);
+            stmt.setString(1, user.getNome());
+            stmt.setString(2, user.getSenha());
+            stmt.setString(3, user.getEmail());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            user.seteValido(false);
+            return null;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    stmt = null;
+                }
+            }
+
+            if (currentCon != null) {
+                try {
+                    currentCon.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                currentCon = null;
+            }
+
+        }
+        user.seteValido(true);
         return user;
     }
 }
