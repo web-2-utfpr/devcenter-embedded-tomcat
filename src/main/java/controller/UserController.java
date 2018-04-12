@@ -1,0 +1,60 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import dao.UserDAO;
+import entities.User;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ *
+ * @author rafae
+ */
+public class UserController extends Controller {
+
+    User loggedUser;
+
+    public UserController(HttpServletRequest req, HttpServletResponse resp) {
+        super(req, resp);
+        loggedUser = (User) request.getSession().getAttribute("loggedUser");
+    }
+
+    public boolean estaLogado() {
+        return loggedUser != null;
+    }
+
+    public User getLoggedUser() {
+        return loggedUser; 
+    }
+
+    public boolean Registrar() {
+        User user = new User();
+        user.setNome(request.getParameter("nome"));
+        user.setSenha(request.getParameter("senha"));
+        user.setEmail(request.getParameter("email"));
+
+        user = UserDAO.Register(user);
+        return ValidaUser(user);
+    }
+
+    public boolean Login() {
+        User user = new User();
+        user.setNome(request.getParameter("nome"));
+        user.setSenha(request.getParameter("senha"));
+
+        user = UserDAO.Login(user);
+        return ValidaUser(user);
+    }
+
+    private boolean ValidaUser(User user) {
+        if (user.eValido()) {
+            request.getSession(true).setAttribute("loggedUser", user);
+        }
+        return user.eValido();
+    }
+
+}
