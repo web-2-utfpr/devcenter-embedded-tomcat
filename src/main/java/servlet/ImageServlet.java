@@ -2,11 +2,10 @@ package servlet;
 
 import controller.ImageController;
 import controller.UserController;
-import dao.ImageDAO;
-import entities.Image;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
         name = "Images",
         urlPatterns = {"/image"}
 )
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 10, // 10MB
+        maxRequestSize = 1024 * 1024 * 50)   // 50MB
 public class ImageServlet extends HttpServlet {
 
     UserController uc;
@@ -52,7 +54,7 @@ public class ImageServlet extends HttpServlet {
         }
 
         ic = new ImageController(req, resp);
-        
+
         ic.create(uc.getLoggedUser().getId());
 
         resp.sendRedirect("image");
