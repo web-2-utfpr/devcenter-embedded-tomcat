@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package service.imgur;
 
 /**
  * Enum that holds the Http Status Codes that we are concerned about when
