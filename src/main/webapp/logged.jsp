@@ -11,16 +11,16 @@
     </head>
     <body>
         <h1>Welcome ${user.getNome()}</h1>
-
+        <h4>Postar Imagem</h4>
+        <form action="image" method="POST" enctype="multipart/form-data">
+            <input type="file" name="imagem" accept="image/*" />
+            <input type="submit" value="Postar"/>
+        </form>
         <c:forEach var="image" items="${images}">
             <img src="${image.getUrl()}" width="400px"> <br/> 
             ${image.getCreate_time()}
             <br/><br/>
         </c:forEach>
 
-        <form action="image" method="POST" enctype="multipart/form-data">
-            <input type="file" name="imagem" />
-            <input type="submit" value="Postar"/>
-        </form>
     </body>
 </html>
