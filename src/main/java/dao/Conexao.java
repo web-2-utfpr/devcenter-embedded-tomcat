@@ -28,7 +28,7 @@ public class Conexao {
             user = System.getenv("MYSQL_USER");
             password = System.getenv("MYSQL_PASSWORD");
         } else {
-            db = "jdbc:mysql://192.168.99.100:3306/instaclone?useSSL=false";
+            db = "jdbc:mysql://192.168.99.100:3306/sql10232125?useSSL=false";
             user = "root";
             password = "root";
         }
