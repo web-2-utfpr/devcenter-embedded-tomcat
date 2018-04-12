@@ -8,16 +8,27 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import javax.naming.NamingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author rafae
  */
 public class Conexao {
-    public static Connection teste() throws SQLException, NamingException {
-//        return DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/instaclone", "root", "root");
-        return DriverManager.getConnection("jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10232125?useSSL=true", "sql10232125", "g1ALnJFmgv");
-
+    public static Connection teste() {
+        Connection con = null;
+        System.out.println();
+        try {
+            
+            if(System.getenv("MYSQL_HOST") != null) {
+                con = DriverManager.getConnection(System.getenv("MYSQL_HOST"), System.getenv("MYSQL_USER"), System.getenv("MYSQL_PASSWORD"));
+            } else {
+                con = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/instaclone", "root", "root");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return con;
     }
 }
