@@ -1,6 +1,7 @@
 package servlet;
 
 import dao.ImageDAO;
+import entities.Image;
 import entities.User;
 import java.io.IOException;
 
@@ -43,9 +44,17 @@ public class ImageServlet extends HttpServlet {
             return;
         }
         
-        // UPAR IMAGEM
+        Image imagem = new Image();
         
-        // ADICIONAR NO BANCO
+        imagem.setId_usuario(loggedUser.getId());
+        imagem.setUrl(req.getParameter("url"));
+        imagem.setPath(req.getParameter("url"));
+        
+        ImageDAO.createImage(imagem);
+        
+        resp.sendRedirect("image");
+        
+        
     }
 
 }
