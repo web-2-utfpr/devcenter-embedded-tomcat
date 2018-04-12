@@ -6,7 +6,6 @@
 package dao;
 
 import entities.Image;
-import entities.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -16,10 +15,10 @@ import java.util.logging.Logger;
  *
  * @author rafae
  */
-public class ImageDAO extends AbstractDAO {
+public class ImageDAO extends DAO {
 
     public static ArrayList getPhotos(long id) {
-        PrepararStatement("SELECT url, create_time FROM imagem WHERE id_usuario = ? ORDER BY create_time");
+        PrepararStatement("SELECT url, create_time FROM imagem WHERE id_usuario = ? ORDER BY create_time DESC");
         ArrayList<Image> images = new ArrayList();
         try {
             stmt.setLong(1, id);

@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author rafae
  */
-public class UserDAO extends AbstractDAO {
+public class UserDAO extends DAO {
 
     public static User Login(User user) {
         PrepararStatement("SELECT id, email FROM usuario WHERE nome = ? AND senha = ?");
