@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package database;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,19 +16,29 @@ import java.util.logging.Logger;
  * @author rafae
  */
 public class Conexao {
-    public static Connection teste() {
-        Connection con = null;
-        System.out.println();
+
+    static Connection con;
+
+    public static Connection GetConnection() {
+        String db = System.getenv("MYSQL_HOST");
+        String user;
+        String password;
+
+        if (db != null) {
+            user = System.getenv("MYSQL_USER");
+            password = System.getenv("MYSQL_PASSWORD");
+        } else {
+            db = "jdbc:mysql://192.168.99.100:3306/sql10232125?useSSL=false";
+            user = "root";
+            password = "root";
+        }
+
         try {
-            
-            if(System.getenv("MYSQL_HOST") != null) {
-                con = DriverManager.getConnection(System.getenv("MYSQL_HOST"), System.getenv("MYSQL_USER"), System.getenv("MYSQL_PASSWORD"));
-            } else {
-                con = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/instaclone", "root", "root");
-            }
+            con = DriverManager.getConnection(db, user, password);
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return con;
     }
 }
