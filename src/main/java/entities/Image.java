@@ -15,7 +15,6 @@ public class Image {
     private long id;
     private long id_usuario;
     private String url;
-    private String path;
     private Date create_time;
 
     public long getId() {
@@ -40,14 +39,6 @@ public class Image {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public Date getCreate_time() {

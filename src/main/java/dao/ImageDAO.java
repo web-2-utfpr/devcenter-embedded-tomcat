@@ -40,11 +40,10 @@ public class ImageDAO extends DAO {
     }
 
     public static Image createImage(Image image) {
-        PrepararStatement("INSERT INTO imagem (`id_usuario`, `url`, `path`) VALUES (?, ?, ?)");
+        PrepararStatement("INSERT INTO imagem (`id_usuario`, `url`) VALUES (?, ?)");
         try {
             stmt.setLong(1, image.getId_usuario());
             stmt.setString(2, image.getUrl());
-            stmt.setString(3, image.getPath());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
