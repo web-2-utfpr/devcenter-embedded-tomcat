@@ -2,12 +2,19 @@
 
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:wrapper>
+<t:wrapper title="Homepage">
     <jsp:attribute name="header">
-        <title>Index</title>
     </jsp:attribute>
-        
+
+    <jsp:attribute name="scripts">
+    </jsp:attribute>
+
     <jsp:body>
-        <h2>Inst4gram</h2>
+        <div class="center-align" id="index-banner">
+            <h1 class="header center orange-text">inst4gram</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">A photo sharer</h5>
+            </div>
+        </div>
     </jsp:body>
 </t:wrapper>
