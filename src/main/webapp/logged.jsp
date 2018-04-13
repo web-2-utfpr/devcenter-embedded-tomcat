@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=windows-1256" pageEncoding="windows-1256" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="windows-1256" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -11,6 +11,9 @@
 
     <jsp:body>
         <h1>Welcome ${user.getNome()}</h1>
+        <form action="/logout" method="GET">
+            <input type="submit" value="logout">
+        </form>
         <h4>Postar Imagem</h4>
         <form action="image" method="POST" enctype="multipart/form-data">
             <input type="file" name="imagem" accept="image/*" />
