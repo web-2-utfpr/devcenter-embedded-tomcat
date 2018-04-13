@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(
-        name = "Login",
-        urlPatterns = {"/login"}
+        name = "Registration",
+        urlPatterns = {"/register"}
 )
-public class LoginServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
     UserController uc;
 
@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         if (uc.estaLogado()) {
             resp.sendRedirect("image");
         } else {
-            uc.Dispatch("/login.jsp");
+            uc.Dispatch("/register.jsp");
         }
     }
 
@@ -37,16 +37,15 @@ public class LoginServlet extends HttpServlet {
         uc = new UserController(req, resp);
 
         if (uc.estaLogado()) {
-            resp.sendRedirect("image ");
+            resp.sendRedirect("image");
             return;
         }
 
-        if (uc.Login()) {
+        if (uc.Registrar()) {
             resp.sendRedirect("image");
         } else {
-            resp.sendRedirect("login");
+            resp.sendRedirect("register");
         }
-
     }
 
 }

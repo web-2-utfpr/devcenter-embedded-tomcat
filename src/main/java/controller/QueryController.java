@@ -1,12 +1,12 @@
 package controller;
 
-import model.PhotoService;
-import model.UserService;
+import model.service.UserService;
+import model.service.ImageService;
 
 public class QueryController {
 
     private UserService userService;
 
-    private PhotoService photoService;
+    private ImageService imageService;
 
 }

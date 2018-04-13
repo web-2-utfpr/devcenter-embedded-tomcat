@@ -4,13 +4,14 @@
 
 <t:wrapper>
     <jsp:attribute name="header">
-        <title>Login</title>
+        <title>Register</title>
     </jsp:attribute>
 
     <jsp:body>
-        <form action="login" method="POST"> 
+        <form action="register" method="POST"> 
             Please enter your username <input type="text" name="nome" required/><br> 
-            Please enter your password <input type="text" name="senha" required/> 
+            Please enter your password <input type="text" name="senha" required/> <br> 
+            Please enter your email <input type="text" name="email" required/> 
             <input type="submit" value="submit"> 
         </form> 
     </jsp:body>

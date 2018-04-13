@@ -1,12 +1,13 @@
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 
-<html>
-    <head>
-        <title>DB Test</title>
-    </head>
-    <body>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-        <h2>Inst4gram</h2> 
-
-    </body>
-</html>
+<t:wrapper>
+    <jsp:attribute name="header">
+        <title>Index</title>
+    </jsp:attribute>
+        
+    <jsp:body>
+        <h2>Inst4gram</h2>
+    </jsp:body>
+</t:wrapper>
