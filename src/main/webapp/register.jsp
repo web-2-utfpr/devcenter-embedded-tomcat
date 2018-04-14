@@ -33,12 +33,8 @@
                         </div>
                     </div>
                     <div class="row card-action">
-                        <div class="col s6">
-                            <input type="reset" id="reset" class="btn-flat grey-text waves-effect">
-                        </div>
-                        <div class="col s6">
-                            <input type="submit" class="btn green waves-effect waves-light" value="Signup">
-                        </div>
+                            <input type="reset" id="reset" class="btn-flat grey-text">
+                            <input type="submit" class="btn green waves-light" value="Signup">
                     </div>
                 </form>
             </div>
