@@ -20,17 +20,19 @@
         <div class="content">
             <div class="container">
                 <% if(request.getSession().getAttribute("loggedUser")!= null) { %>
-                    <jsp:include page='includes/loggedheader.jsp' />
+                <jsp:include page='includes/loggedheader.jsp' />
                 <% } else { %>
-                    <jsp:include page='includes/header.jsp' />
+                <jsp:include page='includes/header.jsp' />
                 <% } %>
-                
+
                 <jsp:doBody />
             </div>
         </div>
         <jsp:include page='includes/footer.jsp' />
 
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
         <jsp:invoke fragment="scripts"/>
     </body>
 </html>

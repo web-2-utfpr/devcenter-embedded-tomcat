@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import database.Database;
 
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.WebResourceSet;

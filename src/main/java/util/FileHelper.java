@@ -1,18 +1,16 @@
-package model.service;
+package util;
 
 import java.io.File;
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
-public class FileService {
+public class FileHelper {
 
     private static final String SAVE_DIR = "uploadFiles";
 
-    public static File SaveImage(HttpServletRequest request) throws IOException, ServletException {
+    public static File SaveImage(Part imagem) throws IOException {
         // gets absolute path of the web application
-        String appPath = request.getServletContext().getRealPath("");
+        String appPath = System.getProperty("user.dir");
 
         // constructs path of the directory to save uploaded file
         String savePath = appPath + File.separator + SAVE_DIR;
@@ -22,11 +20,10 @@ public class FileService {
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdir();
         }
-        Part part = request.getPart("imagem");
-        String fileName = extractFileName(part);
+        String fileName = extractFileName(imagem);
         // refines the fileName in case it is an absolute path
         fileName = new File(fileName).getName();
-        part.write(savePath + File.separator + fileName);
+        imagem.write(savePath + File.separator + fileName);
         return new File(savePath + File.separator + fileName);
 
     }

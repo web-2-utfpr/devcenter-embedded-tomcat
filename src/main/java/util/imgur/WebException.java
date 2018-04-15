@@ -1,4 +1,4 @@
-package model.service.imgur;
+package util.imgur;
 
 /**
  * Custom exception class that handles Web Exceptions.

@@ -5,14 +5,13 @@
  */
 package servlet;
 
-import controller.ImageController;
-import controller.UserController;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.service.ImagemService;
 
 /**
  *
@@ -23,25 +22,24 @@ import javax.servlet.http.HttpServletResponse;
         urlPatterns = {"/feed"}
 )
 public class FeedServlet extends HttpServlet {
-    
-    UserController uc;
-    ImageController ic;
-    
+
+    Context context;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        uc = new UserController(req, resp);
 
-        if (!uc.estaLogado()) {
+        context = new Context(req, resp);
+
+        if (!context.estaLogado()) {
             resp.sendRedirect("login");
             return;
         }
 
-        ic = new ImageController(req, resp);
+        req.setAttribute("user", context.getLoggedUser());
+        req.setAttribute("images", ImagemService.getAllPhotos());
+        context.Dispatch("/feed.jsp");
 
-        req.setAttribute("user", uc.getLoggedUser());
-        req.setAttribute("images", ic.getAllPhotos());
-
-        ic.Dispatch("/feed.jsp");
     }
+
 }

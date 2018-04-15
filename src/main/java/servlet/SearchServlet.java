@@ -11,20 +11,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.service.UsuarioService;
 
 /**
  *
  * @author lucas
  */
 @WebServlet(
-        name = "Log",
-        urlPatterns = {"/logout"}
+        name = "Search",
+        urlPatterns = {"/search"}
 )
-public class LogoutServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
+
+    Context context;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getSession().invalidate();
-        resp.sendRedirect("/");
+
+        context = new Context(req, resp);
+
+        if (!context.estaLogado()) {
+            resp.sendRedirect("login");
+            return;
+        }
+
+        req.setAttribute("users", UsuarioService.search(req.getParameter("q")));
+        req.setAttribute("q", req.getParameter("q"));
+        context.Dispatch("/search.jsp");
+
     }
+
 }
