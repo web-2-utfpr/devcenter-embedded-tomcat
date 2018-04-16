@@ -33,7 +33,7 @@ public class SearchServlet extends HttpServlet {
         context = new Context(req, resp);
 
         if (!context.estaLogado()) {
-            resp.sendRedirect("login");
+            context.Redirect("login");
             return;
         }
 

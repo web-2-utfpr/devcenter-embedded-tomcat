@@ -35,6 +35,12 @@ public class Context {
 
     public void Dispatch(String page) throws ServletException, IOException {
         request.getRequestDispatcher(page).forward(request, response);
+        Database.Close();
+    }
+    
+    public void Redirect(String page) throws IOException {
+        response.sendRedirect(page);
+        Database.Close();
     }
 
 }

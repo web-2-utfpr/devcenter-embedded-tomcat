@@ -2,7 +2,6 @@ package servlet;
 
 import util.Context;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -58,13 +57,13 @@ public class ProfileServlet extends HttpServlet {
         context = new Context(req, resp);
 
         if (!context.estaLogado()) {
-            resp.sendRedirect("login");
+            context.Redirect("login");
             return;
         }
 
         ImagemService.newImage(context.getLoggedUser().getLongId(), req.getPart("imagem"));
-
-        resp.sendRedirect("profile");
+        
+        context.Redirect("profile");
 
     }
 

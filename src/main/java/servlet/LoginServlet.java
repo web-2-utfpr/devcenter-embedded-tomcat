@@ -1,5 +1,6 @@
 package servlet;
 
+import database.Database;
 import util.Context;
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ public class LoginServlet extends HttpServlet {
         context = new Context(req, resp);
 
         if (context.estaLogado()) {
-            resp.sendRedirect("feed");
+            context.Redirect("feed");
             return;
         }
 
@@ -40,7 +41,7 @@ public class LoginServlet extends HttpServlet {
         context = new Context(req, resp);
 
         if (context.estaLogado()) {
-            resp.sendRedirect("feed");
+            context.Redirect("feed");
             return;
         }
 

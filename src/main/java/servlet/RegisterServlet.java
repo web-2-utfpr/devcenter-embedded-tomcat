@@ -2,8 +2,6 @@ package servlet;
 
 import util.Context;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
         context = new Context(req, resp);
 
         if (context.estaLogado()) {
-            resp.sendRedirect("feed");
+            context.Redirect("feed");
             return;
         }
 
