@@ -1,6 +1,9 @@
 package servlet;
 
+import util.Context;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,18 +42,20 @@ public class RegisterServlet extends HttpServlet {
             resp.sendRedirect("feed");
             return;
         }
-        
+
         String nome = req.getParameter("nome");
         String email = req.getParameter("email");
         String senha = req.getParameter("senha");
 
-        if (UsuarioService.Registrar(nome, email, senha)) {
-            req.setAttribute("error", "Cadastrado com sucesso. Realize o login.");
+        try {
+            UsuarioService.registrar(nome, email, senha);
+            req.setAttribute("msg", "Cadastrado com sucesso. Realize o login.");
             context.Dispatch("/login.jsp");
-        } else {
-            req.setAttribute("error", "Usuário e/ou email já cadastrado");
+        } catch (Exception ex) {
+            req.setAttribute("error", ex.getMessage());
             context.Dispatch("/register.jsp");
         }
+
     }
 
 }

@@ -1,5 +1,6 @@
 package servlet;
 
+import util.Context;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -43,16 +44,15 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        Model user = UsuarioService.Login(req.getParameter("nome"), req.getParameter("senha"));
-
-        if (user != null) {
+        try {
+            Model user = UsuarioService.login(req.getParameter("nome"), req.getParameter("senha"));
             context.setLoggedUser(user);
             resp.sendRedirect("feed");
-            return;
+        } catch (Exception ex) {
+            req.setAttribute("error", ex.getMessage());
+            context.Dispatch("/login.jsp");
         }
 
-        req.setAttribute("error", "Usuário e/ou senha incorreto(s)");
-        context.Dispatch("/login.jsp");
     }
 
 }

@@ -17,14 +17,13 @@
 
     </head>
     <body>
-        <div class="content">
-            <div class="container">
-                <% if(request.getSession().getAttribute("loggedUser")!= null) { %>
-                <jsp:include page='includes/loggedheader.jsp' />
-                <% } else { %>
-                <jsp:include page='includes/header.jsp' />
-                <% } %>
-
+        <div class="container">
+            <% if(request.getSession().getAttribute("loggedUser")!= null) { %>
+            <jsp:include page='includes/loggedheader.jsp' />
+            <% } else { %>
+            <jsp:include page='includes/header.jsp' />
+            <% } %>
+            <div class="content">
                 <jsp:doBody />
             </div>
         </div>

@@ -2,8 +2,7 @@ package model.service;
 
 import java.io.IOException;
 import javax.servlet.http.Part;
-import model.Imagem;
-import model.Usuario;
+import model.entity.Image;
 import org.javalite.activejdbc.LazyList;
 import util.FileHelper;
 import util.imgur.Uploader;
@@ -11,22 +10,14 @@ import util.imgur.Uploader;
 public class ImagemService {
     
     public static LazyList getAllPhotos() {
-        return Imagem.findAll().orderBy("create_time DESC");
+        return Image.findAll().orderBy("create_time desc");
     }
 
-    public static LazyList getByUserID(long id) {
-        return Imagem.where("id_usuario = ?", id).orderBy("create_time DESC");
+    public static void newImage(long id, Part img) throws IOException {
+        Image imagem = new Image();
+        imagem.setLong("id_usuario", id);
+        imagem.setString("url", Uploader.upload(FileHelper.SaveImage(img)));
+        imagem.saveIt();
     }
 
-    public static void create(long id, Part img) throws IOException {
-        Imagem imagem = new Imagem();
-        imagem.setLong("Id_usuario", id);
-        imagem.setString("Url", Uploader.upload(FileHelper.SaveImage(img)));
-        imagem.save();
-    }
-
-    public static LazyList getPhotosByUsername(String username) {
-        return getByUserID(Usuario.findFirst("nome = ?", username).getLongId());
-    }
-    
 }

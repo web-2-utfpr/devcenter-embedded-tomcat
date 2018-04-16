@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
-
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:wrapper title="Homepage">
@@ -7,6 +6,9 @@
         <div class="row center-align feed">
             <div class="row">
                 <span class="red-text">${error}</span>
+            </div>
+            <div class="row">
+                <span class="green-text">${msg}</span>
             </div>
             <form action="login" method="POST" class="col form-login">
                 <div class="input-field row">

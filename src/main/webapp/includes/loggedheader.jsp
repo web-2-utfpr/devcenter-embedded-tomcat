@@ -7,12 +7,12 @@
             </form>
         </div>
 
-        <ul class="right hide-on-med-and-down search">
+        <ul class="right hide-on-med-and-down">
             <li>
                 <form action="/search" method="GET"> 
                     <div class="row">
                         <div class="col search"><input class="white-text search center" type="text" name="q" required /></div>
-                        <div class="col search"><a class="search"><button class="btn-flat white-text search-btn"><i class="material-icons search">search</i></button></a></div>
+                        <div class="col search"><button class="btn-flat white-text search-btn"><i class="material-icons search">search</i></button></div>
                     </div>
                 </form>
             </li>

@@ -1,4 +1,4 @@
-package servlet;
+package util;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,18 +8,18 @@ import database.Database;
 import org.javalite.activejdbc.Model;
 
 public class Context {
+
     HttpServletRequest request;
     HttpServletResponse response;
-    
     Model loggedUser;
 
-    Context(HttpServletRequest req, HttpServletResponse resp) {
+    public Context(HttpServletRequest req, HttpServletResponse resp) {
         request = req;
         response = resp;
         Database.Open();
         loggedUser = (Model) request.getSession().getAttribute("loggedUser");
     }
-    
+
     public boolean estaLogado() {
         return loggedUser != null;
     }
@@ -32,9 +32,9 @@ public class Context {
     public Model getLoggedUser() {
         return loggedUser;
     }
-    
+
     public void Dispatch(String page) throws ServletException, IOException {
         request.getRequestDispatcher(page).forward(request, response);
     }
-    
+
 }
