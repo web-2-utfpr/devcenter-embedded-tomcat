@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import database.Database;
 import util.Context;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -33,14 +34,21 @@ public class FeedServlet extends HttpServlet {
         context = new Context(req, resp);
 
         if (!context.estaLogado()) {
-            resp.sendRedirect("login");
+            context.Redirect("login");
             return;
         }
 
-        req.setAttribute("user", context.getLoggedUser());
-        req.setAttribute("images", ImagemService.getAllPhotos());
-        context.Dispatch("/feed.jsp");
+        String p = req.getParameter("p");
 
+        try {
+            int page = p != null ? Integer.parseInt(p) : 1;
+            req.setAttribute("user", context.getLoggedUser());
+            req.setAttribute("images", ImagemService.getAllPhotos(page));
+            req.setAttribute("page", page);
+        } catch (NumberFormatException e) {
+            req.setAttribute("error", e.getMessage());
+        }
+        context.Dispatch("/feed.jsp");
     }
 
 }
