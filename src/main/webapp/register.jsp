@@ -10,7 +10,7 @@
             <form action="register" method="POST" class="col form-login">
                 <div class="input-field row">
                     <label for="nome">Username</label>
-                    <input type="text" class="validate" name="nome" id="nome" required/>
+                    <input type="text" class="validate" name="nome" id="nome" pattern="^[A-Za-z0-9_]{1,15}$" required/>
                 </div>
                 <div class="input-field row">
                     <label for="senha">Password</label>
