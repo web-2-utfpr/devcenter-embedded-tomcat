@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
-public class ImageService {
+public class FileService {
 
     private static final String SAVE_DIR = "uploadFiles";
 

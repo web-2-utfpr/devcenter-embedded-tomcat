@@ -6,6 +6,6 @@ public class UserService {
 
     private UserDAO userDao;
 
-    private ImageService imageService;
+    private FileService imageService;
 
 }

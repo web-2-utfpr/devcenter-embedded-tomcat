@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.ImageDAO;
-import model.service.ImageService;
+import model.service.FileService;
 import model.service.imgur.Uploader;
 
 public class ImageController extends Controller {
@@ -16,6 +16,10 @@ public class ImageController extends Controller {
         super(req, resp);
     }
 
+    public ArrayList  getAllPhotos () {
+       return ImageDAO.getAllPhotos();
+    }
+    
     public ArrayList getByUserID(long id) {
         return ImageDAO.getPhotos(id);
     }
@@ -23,7 +27,7 @@ public class ImageController extends Controller {
     public void create(long id) throws IOException, ServletException {
         Image imagem = new Image();
         imagem.setId_usuario(id);
-        imagem.setUrl(Uploader.upload(ImageService.SaveImage(request)));
+        imagem.setUrl(Uploader.upload(FileService.SaveImage(request)));
         ImageDAO.createImage(imagem);
     }
 
