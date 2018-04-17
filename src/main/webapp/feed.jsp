@@ -13,6 +13,10 @@
                 <input type="file" name="imagem" accept="image/*" />
                 <input type="submit" value="Postar"/>
             </form>
+            <form action="/feed" method="get" enctype="multipart/form-data">
+                <h4>Pesquisar:</h4>
+                <input type="text" placeholder="Digite um nome de usuário ou imagem" value="${ q }" name="q" />
+            </form>
             </br>
             <c:forEach var="image" items="${images}">
                 <img src="${image.getUrl()}" width="400px"> <br/> 
