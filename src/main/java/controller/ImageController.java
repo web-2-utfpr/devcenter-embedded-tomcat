@@ -31,4 +31,8 @@ public class ImageController extends Controller {
         ImageDAO.createImage(imagem);
     }
 
+    public ArrayList getPhotosByQuery(String q) {
+       return ImageDAO.getPhotosByUserOrImageUrl(q);
+    }
+
 }

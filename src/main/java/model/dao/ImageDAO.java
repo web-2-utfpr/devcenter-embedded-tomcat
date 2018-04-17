@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ImageDAO extends DAO {
-    
+
     public static ArrayList getAllPhotos() {
         PrepararStatement("SELECT url, create_time FROM imagem ORDER BY create_time DESC");
         ArrayList<Image> images = new ArrayList();
@@ -26,7 +26,7 @@ public class ImageDAO extends DAO {
         } finally {
             Close();
         }
-        return images; 
+        return images;
     }
 
     public static ArrayList getPhotos(long id) {
@@ -63,5 +63,31 @@ public class ImageDAO extends DAO {
             Close();
         }
         return image;
+    }
+
+    public static ArrayList getPhotosByUserOrImageUrl(String q) {
+        PrepararStatement("SELECT url, create_time FROM imagem "
+                + "LEFT JOIN usuario ON usuario.id = imagem.id_usuario "
+                + "WHERE usuario.nome LIKE ? OR imagem.url LIKE ? "
+                + "ORDER BY create_time DESC");
+        ArrayList<Image> images = new ArrayList();
+        try {
+            stmt.setString(1, "%" + q + "%");
+            stmt.setString(2, "%" + q + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Image image = new Image();
+                image.setUrl(rs.getString("url"));
+                image.setCreate_time(rs.getDate("create_time"));
+                images.add(image);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            Close();
+        }
+        return images;
     }
 }

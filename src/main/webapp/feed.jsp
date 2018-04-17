@@ -15,7 +15,7 @@
             </form>
             <form action="/feed" method="get" enctype="multipart/form-data">
                 <h4>Pesquisar:</h4>
-                <input type="text" placeholder="Digite um nome de usuário ou imagem" name="q" />
+                <input type="text" placeholder="Digite um nome de usuário ou imagem" value="${ q }" name="q" />
             </form>
             </br>
             <c:forEach var="image" items="${images}">
