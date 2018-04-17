@@ -14,7 +14,7 @@
             <h3>${user.getNome()}`s feed</h1>
             <form action="image" method="POST" enctype="multipart/form-data">
                 <h4>Postar Imagem</h4>
-                <input type="file" name="imagem" accept="image/*" />
+                <input type="file" name="imagem" accept="image/*" required="true" />
                 <input type="submit" value="Postar"/>
             </form>
             </br>

@@ -45,18 +45,19 @@ public class ImageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        try {
+            uc = new UserController(req, resp);
 
-        uc = new UserController(req, resp);
+            if (!uc.estaLogado()) {
+                resp.sendRedirect("login");
+                return;
+            }
 
-        if (!uc.estaLogado()) {
-            resp.sendRedirect("login");
-            return;
+            ic = new ImageController(req, resp);
+
+            ic.create(uc.getLoggedUser().getId());
+        } catch (Exception e) {
         }
-
-        ic = new ImageController(req, resp);
-
-        ic.create(uc.getLoggedUser().getId());
-
         resp.sendRedirect("image");
 
     }
