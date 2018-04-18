@@ -47,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             UsuarioService.registrar(nome, email, senha);
-            req.setAttribute("msg", "Cadastrado com sucesso. Realize o login.");
+            req.setAttribute("msg", "User registered. Do Login.");
             context.Dispatch("/login.jsp");
         } catch (Exception ex) {
             req.setAttribute("error", ex.getMessage());

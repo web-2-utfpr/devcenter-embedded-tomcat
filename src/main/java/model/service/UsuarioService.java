@@ -8,7 +8,7 @@ public class UsuarioService {
 
     public static void registrar(String nome, String email, String senha) throws Exception {
         if (User.findFirst("nome = ? OR email = ?", nome, email) != null) {
-            throw new Exception("Usuário e/ou email existentes.");
+            throw new Exception("User not found");
         }
 
         User user = new User();
@@ -22,7 +22,7 @@ public class UsuarioService {
         Model user = findByUsername(nome);
 
         if (!user.getString("senha").equals(senha)) {
-            throw new Exception("Senha incorreta");
+            throw new Exception("Wrong password");
         }
 
         return user;
