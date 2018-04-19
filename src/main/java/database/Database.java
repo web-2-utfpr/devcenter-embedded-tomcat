@@ -17,7 +17,7 @@ public class Database {
             username = System.getenv("MYSQL_USER");
             password = System.getenv("MYSQL_PASSWORD");
         } else {
-            host = "jdbc:mysql://192.168.99.100:3306/sql10232125?useSSL=false";
+            host = "jdbc:mysql://192.168.99.100:3306/sql10233623?useSSL=false";
             username = "root";
             password = "root";
         }

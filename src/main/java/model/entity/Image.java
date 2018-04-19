@@ -1,13 +1,10 @@
 package model.entity;
 
+import org.javalite.activejdbc.Model;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
-import org.javalite.activejdbc.Model;
-import org.javalite.activejdbc.annotations.BelongsTo;
-import org.javalite.activejdbc.annotations.Table;
 
-@Table("imagem")
-@BelongsTo(parent = User.class, foreignKeyName = "id_usuario")
 public class Image extends Model {
 
     static {
@@ -26,7 +23,7 @@ public class Image extends Model {
     }
 
     public String getCreate_time() {
-        Duration d = Duration.between(getTimestamp("create_time").toLocalDateTime(), LocalDateTime.now());
+        Duration d = Duration.between(getTimestamp("created_at").toLocalDateTime(), LocalDateTime.now());
 
         if (d.toMillis() < 60000) {
             return d.toMillis() / 1000 + " segundos atras";

@@ -36,7 +36,7 @@ public class UsuarioService {
     public static Model findByUsername(String username) throws Exception {
         Model user = User.findFirst("nome = ?", username);
         if (user == null) {
-            throw new Exception("Usuário " + username + " não encontrado");
+            throw new Exception("User not found");
         }
         return user;
     }
