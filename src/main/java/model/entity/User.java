@@ -2,9 +2,7 @@ package model.entity;
 
 import org.javalite.activejdbc.LazyList;
 import org.javalite.activejdbc.Model;
-import org.javalite.activejdbc.annotations.Table;
 
-@Table("usuario")
 public class User extends Model {
 
     static {
@@ -29,8 +27,7 @@ public class User extends Model {
     }
 
     public LazyList getPhotos() {
-        return Image.where("id_usuario = ?", get("id")).orderBy("create_time desc");
-        //return getAll(Image.class).orderBy("create_time desc");
+        return getAll(Image.class).orderBy("created_at desc");
     }
 
 }

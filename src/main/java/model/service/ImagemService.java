@@ -14,12 +14,12 @@ public class ImagemService {
 
     public static LazyList getAllPhotos(int page) {
         page = page > 1 ? page : 1;
-        return Image.findAll().orderBy("create_time desc").offset((page - 1) * PAGESIZE).limit(PAGESIZE);
+        return Image.findAll().orderBy("created_at desc").offset((page - 1) * PAGESIZE).limit(PAGESIZE);
     }
 
     public static void newImage(long id, Part img) throws IOException {
         Image imagem = new Image();
-        imagem.setLong("id_usuario", id);
+        imagem.setLong("user_id", id);
         imagem.setString("url", Uploader.upload(FileHelper.SaveImage(img)));
         imagem.saveIt();
     }
