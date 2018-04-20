@@ -3,7 +3,7 @@
         <div class="add-imagem">
             <form action="profile" method="POST" enctype="multipart/form-data">
                 <input class="btn-flat white-text" type="file" name="imagem" accept="image/*" required/>
-                <button type="submit" class="search-btn btn-flat"><i class="material-icons white-text">add</i></button></input>
+                <button type="submit" class="search-btn btn-flat"><i class="material-icons white-text">backup</i></button></input>
             </form>
         </div>
 
