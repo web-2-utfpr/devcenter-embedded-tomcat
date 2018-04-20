@@ -1,4 +1,4 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://instaclone.herokuapp.com)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](http://inst4gram.herokuapp.com) 
 # Instaclone
 
 A Java Web Application using Embedded Tomcat
