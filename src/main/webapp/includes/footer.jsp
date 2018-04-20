@@ -1,3 +1,3 @@
 <footer class="orange white-text">
-    <center>Footer</center>
+    <center>&copy; #kopimi</center>
 </footer>
