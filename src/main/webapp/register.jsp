@@ -18,7 +18,7 @@
                 </div>
                 <div class="input-field row">
                     <label for="email">Email</label>
-                    <input type="email" class="validate" name="email" id="email" required/>
+                    <input type="email" class="validate" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
                 </div>
                 <div class="row card-action">
                     <input type="reset" id="reset" class="btn-flat grey-text">
