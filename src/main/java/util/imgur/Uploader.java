@@ -1,4 +1,4 @@
-package model.service.imgur;
+package util.imgur;
 
 import java.io.BufferedReader;
 import java.io.File;

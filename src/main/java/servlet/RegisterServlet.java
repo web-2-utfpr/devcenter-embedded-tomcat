@@ -1,13 +1,13 @@
 package servlet;
 
-import controller.UserController;
+import util.Context;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.service.UsuarioService;
 
 @WebServlet(
         name = "Registration",
@@ -15,37 +15,45 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class RegisterServlet extends HttpServlet {
 
-    UserController uc;
+    Context context;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        uc = new UserController(req, resp);
+        context = new Context(req, resp);
 
-        if (uc.estaLogado()) {
-            resp.sendRedirect("image");
+        if (context.estaLogado()) {
+            resp.sendRedirect("feed");
         } else {
-            uc.Dispatch("/register.jsp");
+            context.Dispatch("/register.jsp");
         }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        context = new Context(req, resp);
 
-        uc = new UserController(req, resp);
-
-        if (uc.estaLogado()) {
-            resp.sendRedirect("image");
+        if (context.estaLogado()) {
+            context.Redirect("feed");
             return;
         }
 
-        if (uc.Registrar()) {
-            resp.sendRedirect("image");
-        } else {
-            resp.sendRedirect("register");
+        String nome = req.getParameter("nome");
+        String email = req.getParameter("email");
+        String senha = req.getParameter("senha");
+
+        try {
+            UsuarioService.registrar(nome, email, senha);
+            req.setAttribute("msg", "User registered. Do Login.");
+            context.Dispatch("/login.jsp");
+        } catch (Exception ex) {
+            req.setAttribute("error", ex.getMessage());
+            context.Dispatch("/register.jsp");
         }
+
     }
 
 }

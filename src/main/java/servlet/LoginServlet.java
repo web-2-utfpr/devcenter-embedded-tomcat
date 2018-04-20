@@ -1,6 +1,7 @@
 package servlet;
 
-import controller.UserController;
+import database.Database;
+import util.Context;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.service.UsuarioService;
+import org.javalite.activejdbc.Model;
 
 @WebServlet(
         name = "Login",
@@ -15,36 +18,40 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class LoginServlet extends HttpServlet {
 
-    UserController uc;
+    Context context;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        uc = new UserController(req, resp);
+        context = new Context(req, resp);
 
-        if (uc.estaLogado()) {
-            resp.sendRedirect("image");
-        } else {
-            uc.Dispatch("/login.jsp");
+        if (context.estaLogado()) {
+            context.Redirect("feed");
+            return;
         }
+
+        context.Dispatch("/login.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        uc = new UserController(req, resp);
+        context = new Context(req, resp);
 
-        if (uc.estaLogado()) {
-            resp.sendRedirect("image ");
+        if (context.estaLogado()) {
+            context.Redirect("feed");
             return;
         }
 
-        if (uc.Login()) {
-            resp.sendRedirect("image");
-        } else {
-            resp.sendRedirect("login");
+        try {
+            Model user = UsuarioService.login(req.getParameter("nome"), req.getParameter("senha"));
+            context.setLoggedUser(user);
+            resp.sendRedirect("feed");
+        } catch (Exception ex) {
+            req.setAttribute("error", ex.getMessage());
+            context.Dispatch("/login.jsp");
         }
 
     }

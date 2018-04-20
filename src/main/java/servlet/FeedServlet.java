@@ -5,15 +5,15 @@
  */
 package servlet;
 
-import controller.ImageController;
-import controller.UserController;
+import database.Database;
+import util.Context;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.service.ImagemService;
 
 /**
  *
@@ -25,33 +25,30 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class FeedServlet extends HttpServlet {
 
-    UserController uc;
-    ImageController ic;
+    Context context;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        uc = new UserController(req, resp);
 
-        if (!uc.estaLogado()) {
-            resp.sendRedirect("login");
+        context = new Context(req, resp);
+
+        if (!context.estaLogado()) {
+            context.Redirect("login");
             return;
         }
 
-        ic = new ImageController(req, resp);
+        String p = req.getParameter("p");
 
-        String q = (req.getParameter("q") == null) ? "" : req.getParameter("q");
-        ArrayList images = new ArrayList();
-        if (!q.equals("")) {
-            images = ic.getPhotosByQuery(q);
-        } else {
-            images = ic.getAllPhotos();
+        try {
+            int page = p != null ? Integer.parseInt(p) : 1;
+            req.setAttribute("user", context.getLoggedUser());
+            req.setAttribute("images", ImagemService.getAllPhotos(page));
+            req.setAttribute("page", page);
+        } catch (NumberFormatException e) {
+            req.setAttribute("error", e.getMessage());
         }
-
-        req.setAttribute("user", uc.getLoggedUser());
-        req.setAttribute("images", images);
-        req.setAttribute("q", q);
-
-        ic.Dispatch("/feed.jsp");
+        context.Dispatch("/feed.jsp");
     }
+
 }

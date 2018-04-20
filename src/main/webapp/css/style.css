@@ -35,3 +35,29 @@ footer {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.search {
+    height: 64px !important;
+    padding: 0px 0px 0px 0px !important;
+    border-bottom: none !important;
+}
+
+.search-btn {
+    height: 64px !important;
+}
+
+.feed {
+    width: 400px;
+}
+
+.card {
+    z-index: -3;
+}
+
+.form-login {
+    width: 100% !important;
+}
+
+.add-imagem {
+    display: inline-block;
+}

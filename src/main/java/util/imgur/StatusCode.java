@@ -1,4 +1,4 @@
-package model.service.imgur;
+package util.imgur;
 
 /**
  * Enum that holds the Http Status Codes that we are concerned about when

@@ -1,28 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@page contentType="text/html" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:wrapper title="Feed">
+<t:wrapper title="page ${page} feed">
     <jsp:body>
-        <div class="center">
-            <h1>feed</h1>
-            <form action="image" method="POST" enctype="multipart/form-data">
-                <h4>Postar Imagem</h4>
-                <input type="file" name="imagem" accept="image/*" required="true" />
-                <input type="submit" value="Postar"/>
-            </form>
-            <form action="/feed" method="get" enctype="multipart/form-data">
-                <h4>Pesquisar:</h4>
-                <input type="text" placeholder="Digite um nome de usuário ou imagem" value="${ q }" name="q" />
-            </form>
-            </br>
+        <div class="row center feed">
+            <span class="red-text">${error}</span>
+            <h5>feed page ${page}</h5>
             <c:forEach var="image" items="${images}">
-                <img src="${image.getUrl()}" width="400px"> <br/> 
-                ${image.getCreate_time()}
-                <br/><br/>
+                <a href="/profile?u=${image.getUsuario()}">
+                    <t:image url="${image.getUrl()}" create_time="${image.getCreate_time()}" nome="${image.getUsuario()}" />
+                </a>
             </c:forEach>
+            <a href="/feed?p=${page-1}"><</a>
+            <a href="/feed?p=${page+1}">></a>
         </div>
     </jsp:body>
 </t:wrapper>
