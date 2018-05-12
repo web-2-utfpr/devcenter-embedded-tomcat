@@ -29,12 +29,6 @@ public class ProfileServlet extends HttpServlet {
 
         context = new Context(req, resp);
 
-        if (!context.estaLogado()) {
-            req.setAttribute("error", "Efetue o login para visualizar essa pagina");
-            context.Dispatch("/login.jsp");
-            return;
-        }
-
         String username = req.getParameter("u");
 
         if (username == null) {
@@ -55,11 +49,6 @@ public class ProfileServlet extends HttpServlet {
             throws ServletException, IOException {
 
         context = new Context(req, resp);
-
-        if (!context.estaLogado()) {
-            context.Redirect("login");
-            return;
-        }
 
         ImagemService.newImage(context.getLoggedUser().getLongId(), req.getPart("imagem"));
         
