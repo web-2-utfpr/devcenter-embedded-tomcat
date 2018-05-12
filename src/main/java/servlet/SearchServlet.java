@@ -31,12 +31,6 @@ public class SearchServlet extends HttpServlet {
             throws ServletException, IOException {
 
         context = new Context(req, resp);
-
-        if (!context.estaLogado()) {
-            context.Redirect("login");
-            return;
-        }
-
         req.setAttribute("users", UsuarioService.search(req.getParameter("q")));
         req.setAttribute("q", req.getParameter("q"));
         context.Dispatch("/search.jsp");
