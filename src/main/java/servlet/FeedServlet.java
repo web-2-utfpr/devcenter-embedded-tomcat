@@ -31,15 +31,9 @@ public class FeedServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        context = new Context(req, resp);
-
-        if (!context.estaLogado()) {
-            context.Redirect("login");
-            return;
-        }
-
         String p = req.getParameter("p");
-
+        context = new Context(req, resp);
+        
         try {
             int page = p != null ? Integer.parseInt(p) : 1;
             req.setAttribute("user", context.getLoggedUser());
@@ -49,6 +43,7 @@ public class FeedServlet extends HttpServlet {
             req.setAttribute("error", e.getMessage());
         }
         context.Dispatch("/feed.jsp");
+        
     }
 
 }
