@@ -1,6 +1,6 @@
 package servlet;
 
-import database.Database;
+
 import util.Context;
 import java.io.IOException;
 
@@ -23,15 +23,9 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        
+        req.getRequestDispatcher("/login.jsp").forward(req, resp);
 
-        context = new Context(req, resp);
-
-        if (context.estaLogado()) {
-            context.Redirect("feed");
-            return;
-        }
-
-        context.Dispatch("/login.jsp");
     }
 
     @Override
@@ -39,11 +33,6 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         context = new Context(req, resp);
-
-        if (context.estaLogado()) {
-            context.Redirect("feed");
-            return;
-        }
 
         try {
             Model user = UsuarioService.login(req.getParameter("nome"), req.getParameter("senha"));
