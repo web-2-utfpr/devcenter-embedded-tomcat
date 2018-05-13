@@ -11,10 +11,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import util.Context;
-/**
- *
- * @author lucas
- */
 
 @WebFilter(value= {"/login", "/register", "/feed", "/profile", "/search"})
 
@@ -45,5 +41,4 @@ public class AuthenticationFilter implements Filter  {
         } 
         chain.doFilter(req, res);
     }
-    
 }
