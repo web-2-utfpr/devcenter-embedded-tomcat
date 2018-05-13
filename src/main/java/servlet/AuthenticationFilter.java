@@ -30,8 +30,6 @@ public class AuthenticationFilter implements Filter  {
         
         String path;
         path = ((HttpServletRequest)req).getRequestURI();
-
-        System.err.println("Passing");
         
         if (path.equals("/login") || path.equals("/register")) {
            
