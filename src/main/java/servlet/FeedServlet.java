@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlet;
 
 import database.Database;
@@ -15,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.service.ImagemService;
 
-/**
- *
- * @author lucas
- */
 @WebServlet(
         name = "Feed",
         urlPatterns = {"/feed"}
@@ -45,5 +36,4 @@ public class FeedServlet extends HttpServlet {
         context.Dispatch("/feed.jsp");
         
     }
-
 }
