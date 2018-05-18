@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlet;
 
 import database.Database;
@@ -15,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.service.ImagemService;
 
-/**
- *
- * @author lucas
- */
 @WebServlet(
         name = "Feed",
         urlPatterns = {"/feed"}
@@ -31,15 +22,9 @@ public class FeedServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        context = new Context(req, resp);
-
-        if (!context.estaLogado()) {
-            context.Redirect("login");
-            return;
-        }
-
         String p = req.getParameter("p");
-
+        context = new Context(req, resp);
+        
         try {
             int page = p != null ? Integer.parseInt(p) : 1;
             req.setAttribute("user", context.getLoggedUser());
@@ -49,6 +34,6 @@ public class FeedServlet extends HttpServlet {
             req.setAttribute("error", e.getMessage());
         }
         context.Dispatch("/feed.jsp");
+        
     }
-
 }

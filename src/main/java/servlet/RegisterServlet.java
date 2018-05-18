@@ -20,26 +20,16 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
-        context = new Context(req, resp);
-
-        if (context.estaLogado()) {
-            resp.sendRedirect("feed");
-        } else {
-            context.Dispatch("/register.jsp");
-        }
+        
+        req.getRequestDispatcher("/register.jsp").forward(req, resp);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        
         context = new Context(req, resp);
-
-        if (context.estaLogado()) {
-            context.Redirect("feed");
-            return;
-        }
 
         String nome = req.getParameter("nome");
         String email = req.getParameter("email");
