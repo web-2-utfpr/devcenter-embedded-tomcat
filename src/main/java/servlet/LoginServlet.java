@@ -1,7 +1,12 @@
 package servlet;
 
+import exception.InvalidPasswordException;
+import exception.UserNotFoundException;
 import util.Context;
 import java.io.IOException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,12 +34,17 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         context = new Context(req, resp);
+        ResourceBundle messages = ResourceBundle.getBundle("Messages");
+        
         try {
             Model user = UsuarioService.login(req.getParameter("nome"), req.getParameter("senha"));
             context.setLoggedUser(user);
             resp.sendRedirect("feed");
-        } catch (Exception ex) {
-            req.setAttribute("error", ex.getMessage());
+        } catch (UserNotFoundException ex) {
+            req.setAttribute("error", messages.getString("userNotRegistered"));
+            context.Dispatch("/login.jsp");
+        } catch (InvalidPasswordException ex) {
+            req.setAttribute("error", messages.getString("userWrongPassword"));
             context.Dispatch("/login.jsp");
         }
         
