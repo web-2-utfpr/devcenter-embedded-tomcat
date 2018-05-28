@@ -39,7 +39,7 @@ public class RegisterServlet extends HttpServlet {
         String email = req.getParameter("email");
         String senha = req.getParameter("senha");
                
-        if (nome == null || !(nome.matches("^[a-z]+[0-9]*$"))) {
+        if (nome == null || !(nome.matches("^[a-zA-Z]+[0-9]*$"))) {
             req.setAttribute("error", messages.getString("invalidName"));
             context.Dispatch("/register.jsp");
             return;
