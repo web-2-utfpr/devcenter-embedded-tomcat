@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
         ResourceBundle messages = ResourceBundle.getBundle("Messages");
         
         try {
-            Model user = UsuarioService.login(req.getParameter("nome"), req.getParameter("senha"));
+            Model user = UsuarioService.login(req.getParameter("username"), req.getParameter("password"));
             context.setLoggedUser(user);
             resp.sendRedirect("feed");
         } catch (UserNotFoundException ex) {

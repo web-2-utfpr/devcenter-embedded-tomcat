@@ -1,5 +1,6 @@
 package servlet;
 
+import exception.EmailAlreadyRegisteredException;
 import exception.UserAlreadyExistsException;
 import util.Context;
 import java.io.IOException;
@@ -35,11 +36,11 @@ public class RegisterServlet extends HttpServlet {
         
         ResourceBundle messages = ResourceBundle.getBundle("Messages");
         
-        String nome = req.getParameter("nome");
+        String username = req.getParameter("username");
         String email = req.getParameter("email");
-        String senha = req.getParameter("senha");
+        String password = req.getParameter("password");
                
-        if (nome == null || !(nome.matches("^[a-z]+[0-9]*$"))) {
+        if (username == null || !(username.matches("^[a-zA-Z]+[0-9]*$"))) {
             req.setAttribute("error", messages.getString("invalidName"));
             context.Dispatch("/register.jsp");
             return;
@@ -51,22 +52,22 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         
-        if (senha == null || senha.length() < 8 ) {
+        if (password == null || password.length() < 8 ) {
             req.setAttribute("error", messages.getString("invalidPassword"));
             context.Dispatch("/register.jsp");
             return;
         }
         
-        
-   //     ResourceBundle messages = ResourceBundle.getBundle("Messages");
-        
+                
         try {
-            UsuarioService.registrar(nome, email, senha);
+            UsuarioService.registrar(username, email, password);
             req.setAttribute("msg", messages.getString("registerSuccess"));
-    //        req.setAttribute("msg", messages.getString("register:success"));
             context.Dispatch("/login.jsp");
         } catch (UserAlreadyExistsException ex) {
             req.setAttribute("error", messages.getString("userAlreadyExists"));
+            context.Dispatch("/register.jsp");
+        } catch (EmailAlreadyRegisteredException ex) {
+            req.setAttribute("error", messages.getString("emailInUse"));
             context.Dispatch("/register.jsp");
         }
 
