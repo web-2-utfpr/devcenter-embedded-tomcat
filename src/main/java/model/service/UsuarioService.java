@@ -2,6 +2,7 @@ package model.service;
 
 import exception.InvalidPasswordException;
 import exception.UserAlreadyExistsException;
+import exception.EmailAlreadyRegisteredException;
 import exception.UserNotFoundException;
 import model.entity.User;
 import org.javalite.activejdbc.LazyList;
@@ -9,9 +10,13 @@ import org.javalite.activejdbc.Model;
 
 public class UsuarioService {
 
-    public static void registrar(String nome, String email, String senha) throws UserAlreadyExistsException {
-        if (User.findFirst("nome = ? OR email = ?", nome, email) != null) {
+    public static void registrar(String nome, String email, String senha) throws UserAlreadyExistsException, EmailAlreadyRegisteredException {
+        if (User.findFirst("nome = ?", nome) != null) {
             throw new UserAlreadyExistsException();
+        }
+        
+        if (User.findFirst("email = ?", email) != null) {
+            throw new EmailAlreadyRegisteredException();
         }
 
         User user = new User();
