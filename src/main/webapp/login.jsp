@@ -12,12 +12,12 @@
             </div>
             <form action="login" method="POST" class="col form-login">
                 <div class="input-field row">
-                    <label for="nome">Username</label>
-                    <input type="text" class="validate" name="nome" id="nome" required/>
+                    <label for="username">Username</label>
+                    <input type="text" class="validate" name="username" id="username" required/>
                 </div>
                 <div class="input-field row">
-                    <label for="senha">Password</label>
-                    <input type="password" class="validate" name="senha" id="senha" required/>
+                    <label for="password">Password</label>
+                    <input type="password" class="validate" name="password" id="password" required/>
                 </div>
                 <div class="row card-action">
                     <input type="reset" id="reset" class="btn-flat grey-text">
