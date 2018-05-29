@@ -1,5 +1,6 @@
 package servlet;
 
+import exception.EmailAlreadyRegisteredException;
 import exception.UserAlreadyExistsException;
 import util.Context;
 import java.io.IOException;
@@ -57,16 +58,16 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         
-        
-   //     ResourceBundle messages = ResourceBundle.getBundle("Messages");
-        
+                
         try {
             UsuarioService.registrar(username, email, password);
             req.setAttribute("msg", messages.getString("registerSuccess"));
-    //        req.setAttribute("msg", messages.getString("register:success"));
             context.Dispatch("/login.jsp");
         } catch (UserAlreadyExistsException ex) {
             req.setAttribute("error", messages.getString("userAlreadyExists"));
+            context.Dispatch("/register.jsp");
+        } catch (EmailAlreadyRegisteredException ex) {
+            req.setAttribute("error", messages.getString("emailInUse"));
             context.Dispatch("/register.jsp");
         }
 
