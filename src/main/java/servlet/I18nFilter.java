@@ -20,7 +20,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
-@WebFilter(value={"/login", "/register"})
+@WebFilter(urlPatterns={"*"})
 public class I18nFilter implements Filter  {
     
     public void init (FilterConfig filterConfig) throws ServletException {}
