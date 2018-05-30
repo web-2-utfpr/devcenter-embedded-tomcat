@@ -21,7 +21,7 @@ public class AuthenticationFilter implements Filter  {
     public void destroy () {}
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        
+                
         Context context = new Context((HttpServletRequest)req, (HttpServletResponse)res);
         String path;
         path = ((HttpServletRequest)req).getRequestURI();

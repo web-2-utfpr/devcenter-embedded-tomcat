@@ -5,8 +5,6 @@ import exception.UserNotFoundException;
 import util.Context;
 import java.io.IOException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +18,12 @@ import org.javalite.activejdbc.Model;
         urlPatterns = {"/login"}
 )
 public class LoginServlet extends HttpServlet {
-
+    
+    private static final String USER_NOT_REGISTERED = "userNotRegistered";
+    private static final String USER_WRONG_PASSWORD = "userWrongPassword";
+            
     Context context;
+    ResourceBundle messages = ResourceBundle.getBundle("Messages");
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -34,17 +36,15 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         context = new Context(req, resp);
-        ResourceBundle messages = ResourceBundle.getBundle("Messages");
-        
         try {
             Model user = UsuarioService.login(req.getParameter("username"), req.getParameter("password"));
             context.setLoggedUser(user);
             resp.sendRedirect("feed");
         } catch (UserNotFoundException ex) {
-            req.setAttribute("error", messages.getString("userNotRegistered"));
+            req.setAttribute("error", messages.getString(USER_NOT_REGISTERED));
             context.Dispatch("/login.jsp");
         } catch (InvalidPasswordException ex) {
-            req.setAttribute("error", messages.getString("userWrongPassword"));
+            req.setAttribute("error", messages.getString(USER_WRONG_PASSWORD));
             context.Dispatch("/login.jsp");
         }
         

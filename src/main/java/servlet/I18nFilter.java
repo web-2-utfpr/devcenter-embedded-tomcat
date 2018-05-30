@@ -6,7 +6,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -24,7 +28,23 @@ public class I18nFilter implements Filter  {
     public void destroy () {}
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+        
         Locale.setDefault(((HttpServletRequest)req).getLocale());
+        
+        ResourceBundle messages = ResourceBundle.getBundle("Messages");
+        
+        Enumeration<String> keys = messages.getKeys();
+        
+        Map labels = new HashMap();
+        
+        while(keys.hasMoreElements()){
+            String label = keys.nextElement();
+            String value = messages.getString(label);
+            labels.put(label, value);
+        }
+        
+        req.setAttribute("labels", labels);        
         chain.doFilter(req, res);
+        
     } 
 }
