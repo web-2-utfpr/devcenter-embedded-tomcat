@@ -12,16 +12,16 @@
             </div>
             <form action="login" method="POST" class="col form-login">
                 <div class="input-field row">
-                    <label for="username">Username</label>
+                    <label for="username">${labels["usernameLabel"]}</label>
                     <input type="text" class="validate" name="username" id="username" required/>
                 </div>
                 <div class="input-field row">
-                    <label for="password">Password</label>
+                    <label for="password">${labels["passwordLabel"]}</label>
                     <input type="password" class="validate" name="password" id="password" required/>
                 </div>
                 <div class="row card-action">
-                    <input type="reset" id="reset" class="btn-flat grey-text">
-                    <input type="submit" class="btn green waves-light" value="Login">
+                    <input type="reset" id="reset" value=${labels["reset"]} class="btn-flat grey-text">
+                    <input type="submit" value=${labels["login"]} class="btn green waves-light">
                 </div>
             </form>
         </div>
