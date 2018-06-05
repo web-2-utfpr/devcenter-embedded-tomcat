@@ -23,7 +23,7 @@ public class Image extends Model {
     }
 
     public String getCreate_time() {
-        return getTimestamp("created_at").toLocalDateTime();
+        return getTimestamp("created_at").toLocalDateTime().toString();
     }
 
     public String getUsuario() {
