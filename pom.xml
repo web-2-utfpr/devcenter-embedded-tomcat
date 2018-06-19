@@ -42,6 +42,21 @@
             <artifactId>activejdbc</artifactId>
             <version>${activejdbc.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java</artifactId>
+            <version>9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java-tools</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java-servlet</artifactId>
+            <version>5.0.1</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>inst4gram</finalName>

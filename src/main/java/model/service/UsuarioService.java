@@ -49,4 +49,13 @@ public class UsuarioService {
         return user;
     }
 
+    public static String RESTLogin (String email, String password) throws UserNotFoundException, InvalidPasswordException {
+        Model user = findByUsername(email);
+
+        if (!user.getString("senha").equals(password)) {
+            throw new InvalidPasswordException();
+        }
+        
+        return "token";
+    }
 }

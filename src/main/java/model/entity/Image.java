@@ -29,5 +29,9 @@ public class Image extends Model {
     public String getUsuario() {
         return parent(User.class).getNome();
     }
+    
+    public String getData(){
+        return getTimestamp("created_at").toLocalDateTime().toString();
+    }
 
 }

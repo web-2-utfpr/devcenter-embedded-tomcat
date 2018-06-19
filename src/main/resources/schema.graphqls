@@ -1,0 +1,20 @@
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+type QueryType {
+    allPhotos(page: Int = 1): [Photo]
+    # me: User
+    # user(id: Int!): User
+}
+
+type MutationType {
+    login(email: String!, password: String!): String
+    # createUser(email: String!, password: String!): String
+}
+
+type Photo {
+    url: String!
+    data: String!
+}
