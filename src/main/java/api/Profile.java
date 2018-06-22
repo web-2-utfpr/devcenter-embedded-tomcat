@@ -11,17 +11,32 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import model.service.UsuarioService;
-import org.javalite.activejdbc.Model;
+import model.repository.ImageRepository;
+import model.repository.UserRepository;
 
 @Path("/profile")
 public class Profile {
+
+    private static UserRepository userRepository;
+    private static ImageRepository imageRepository;
+
+    static {
+        userRepository = new UserRepository();
+        imageRepository = new ImageRepository();
+    }
+
     @GET
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Model getPhotos(@PathParam("username") String username) throws UserNotFoundException {
-        database.Database.Open();
-        return UsuarioService.findByUsername(username);
+    public Object getProfile(@PathParam("username") String username) throws UserNotFoundException {
+        return userRepository.findByUsername(username);
+    }
+    
+    @GET
+    @Path("/images/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Object getPhotos(@PathParam("username") String username) throws UserNotFoundException {
+        return imageRepository.findByUsername(username);
     }
 
 }
