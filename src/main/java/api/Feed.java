@@ -15,10 +15,11 @@ import model.bean.Image;
 import model.repository.ImageRepository;
 
 @Path("/feed")
+@Produces(MediaType.APPLICATION_JSON)
 public class Feed {
     
     private static ImageRepository imageRepository;
-    private static int PAGESIZE = 5;
+    private static int PAGESIZE = 3;
     
     static {
         imageRepository = new ImageRepository();
@@ -26,7 +27,6 @@ public class Feed {
     
     @GET
     @Path("/{page}")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<Image> getMsg(@PathParam("page") int page) {
         return imageRepository.getAllPhotos(page * PAGESIZE, PAGESIZE);
     }

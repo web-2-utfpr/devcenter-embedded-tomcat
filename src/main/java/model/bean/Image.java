@@ -6,10 +6,12 @@
 package model.bean;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,9 +26,9 @@ import javax.persistence.Table;
 public class Image implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
     
     private String url;
     
@@ -34,13 +36,17 @@ public class Image implements Serializable {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private Usuario user;
 
-    public Long getId() {
+    public Image() {
+        created_at = LocalDateTime.now().toString();
+    }
+    
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -59,12 +65,12 @@ public class Image implements Serializable {
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
-    
-    public User getUser() {
+
+    public Usuario getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Usuario user) {
         this.user = user;
     }
     

@@ -5,11 +5,10 @@
  */
 package database;
 
-import static database.Database.host;
 import java.util.HashMap;
 import java.util.Map;
 import model.bean.Image;
-import model.bean.User;
+import model.bean.Usuario;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -66,7 +65,7 @@ public class HibernateUtil {
 
                 registry = registryBuilder.build();
                 MetadataSources sources = new MetadataSources(registry);
-                sources.addAnnotatedClass(User.class);
+                sources.addAnnotatedClass(Usuario.class);
                 sources.addAnnotatedClass(Image.class);
                 Metadata metadata = sources.getMetadataBuilder().build();
                 sessionFactory = metadata.getSessionFactoryBuilder().build();

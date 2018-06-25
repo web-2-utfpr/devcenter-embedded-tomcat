@@ -6,14 +6,11 @@
 package model.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,25 +19,40 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "users")
-public class User implements Serializable{
+public class Usuario implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
+    @Column(name = "nome")
     private String nome;
-    private String email;
-    private String senha;
-    
-    //@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    //private List<Image> images = new ArrayList<>();
 
-    public Long getId() {
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "senha")
+    private String senha;
+
+    public Usuario() {
+    }
+
+    public Usuario(long id) {
+        this.id = id;
+    }
+
+    public Usuario(String nome, String email, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -67,5 +79,5 @@ public class User implements Serializable{
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
+
 }

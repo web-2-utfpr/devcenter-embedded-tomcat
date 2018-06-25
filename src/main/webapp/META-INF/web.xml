@@ -5,10 +5,18 @@
     <description>Instaclone</description>
     <filter>
         <filter-name>CORSFilter</filter-name>
-        <filter-class>cors.CORSResponseFilter</filter-class>
+        <filter-class>filter.CORSResponseFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CORSFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>jwtFilter</filter-name>
+        <filter-class>filter.JWTFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>jwtFilter</filter-name>
         <url-pattern>/api/*</url-pattern>
     </filter-mapping>
     <servlet>

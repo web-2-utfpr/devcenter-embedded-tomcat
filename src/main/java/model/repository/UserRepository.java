@@ -11,7 +11,11 @@ import exception.UserAlreadyExistsException;
 import exception.UserNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import model.bean.User;
+import model.bean.Usuario;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.mindrot.jbcrypt.BCrypt;
+import util.JWTUtil;
 
 /**
  *
@@ -19,49 +23,83 @@ import model.bean.User;
  */
 public class UserRepository extends Repository {
 
-    public void registrar(String nome, String email, String senha) throws UserAlreadyExistsException, EmailAlreadyRegisteredException {
+    public String registrar(String nome, String email, String senha) throws UserAlreadyExistsException, EmailAlreadyRegisteredException {
         try {
             beginSession();
+            transaction = session.beginTransaction();
+            session.createNativeQuery("INSERT INTO users (nome, email, senha) VALUES (:nome, :email, :senha)")
+                    .setParameter("nome", nome)
+                    .setParameter("email", email)
+                    .setParameter("senha", BCrypt.hashpw(senha, BCrypt.gensalt()))
+                    .executeUpdate();
+            transaction.commit();
+            return JWTUtil.create(nome);
         } finally {
             closeSession();
         }
     }
 
     public String login(String nome, String senha) throws InvalidPasswordException, UserNotFoundException {
-        User user = null;
         try {
             beginSession();
-
+            Usuario user = findByUsername(nome);
+            if (BCrypt.checkpw(senha, user.getSenha())) {
+                String token = JWTUtil.create(String.valueOf(user.getId()));
+                return token;
+            } else {
+                throw new InvalidPasswordException();
+            }
         } finally {
             closeSession();
         }
-
-        if (!user.getSenha().equals(senha)) {
-            throw new InvalidPasswordException();
-        }
-
-        return "token";
-
     }
 
-    public List<User> search(String username) {
-        List<User> users = new ArrayList<>();
+    public List<Usuario> search(String username) {
+        List<Usuario> users = new ArrayList<>();
         try {
             beginSession();
+            JSONArray list = new JSONArray(session.createQuery("FROM Usuario AS u WHERE u.nome LIKE :nome")
+                    .setParameter("nome", username + "%")
+                    .list());
+            for (Object obj : list) {
+                users.add(setUser((JSONObject)(obj)));
+            }
         } finally {
             closeSession();
         }
         return users;
     }
 
-    public Object findByUsername(String username) throws UserNotFoundException {
+    public Usuario findByUsername(String username) throws UserNotFoundException {
         try {
             beginSession();
-            return session.createQuery("FROM User AS u WHERE u.nome = :nome", User.class)
+            JSONObject user = new JSONObject(session.createQuery("FROM Usuario AS u WHERE u.nome = :nome")
                     .setParameter("nome", username)
-                    .getSingleResult();
+                    .list().get(0));
+            return setUser(user);
         } finally {
             closeSession();
         }
+    }
+
+    public Usuario findById(Long id) throws UserNotFoundException {
+        try {
+            beginSession();
+            JSONObject user = new JSONObject(session.createQuery("FROM Usuario AS u WHERE u.id = :id")
+                    .setParameter("id", id)
+                    .list().get(0));
+            return setUser(user);
+        } finally {
+            closeSession();
+        }
+    }
+
+    private Usuario setUser(JSONObject user) {
+        Usuario u = new Usuario();
+        u.setId(user.getLong("id"));
+        u.setNome(user.getString("nome"));
+        u.setEmail(user.getString("email"));
+        u.setSenha(user.getString("senha"));
+        return u;
     }
 }

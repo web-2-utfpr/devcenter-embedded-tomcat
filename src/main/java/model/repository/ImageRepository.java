@@ -5,11 +5,10 @@
  */
 package model.repository;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.Part;
 import model.bean.Image;
+import model.bean.Usuario;
 
 /**
  *
@@ -21,7 +20,7 @@ public class ImageRepository extends Repository {
         List<Image> images = new ArrayList<>();
         try {
             beginSession();
-            images = session.createQuery("FROM Image AS i JOIN FETCH i.user ORDER BY i.created_at DESC", Image.class)
+            images = session.createQuery("FROM Image AS i JOIN FETCH i.user ORDER BY i.created_at DESC")
                     .setFirstResult(firstResult)
                     .setMaxResults(maxResults)
                     .list();
@@ -31,15 +30,26 @@ public class ImageRepository extends Repository {
         return images;
     }
 
-    public void newImage(long id, Part img) throws IOException {
-
+    public long newImage(Usuario user, String url) {
+        try {
+            beginSession();
+            transaction = session.beginTransaction();
+            session.createNativeQuery("INSERT INTO images (user_id, url) VALUES (:user_id, :url)")
+                    .setParameter("user_id", user.getId())
+                    .setParameter("url", url)
+                    .executeUpdate();
+            transaction.commit();
+        } finally {
+            closeSession();
+        }
+        return 0;
     }
 
-    public Object findByUsername(String username) {
+    public List<Image> findByUsername(String username) {
         List<Image> images = new ArrayList<>();
         try {
             beginSession();
-            images = session.createQuery("FROM Image AS i JOIN FETCH i.user WHERE i.user.nome = :nome ORDER BY i.created_at DESC", Image.class)
+            images = session.createQuery("FROM Image AS i JOIN FETCH i.user WHERE i.user.nome = :nome ORDER BY i.created_at DESC")
                     .setParameter("nome", username)
                     .list();
         } finally {
