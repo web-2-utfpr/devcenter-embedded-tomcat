@@ -7,8 +7,8 @@
         <div class="row center feed">
             <span class="red-text">${error}</span>
             <h3><a href="mailto:${user.getEmail()}">${user.getNome()}</a></h3>
-            <c:forEach var="image" items="${user.getPhotos()}">
-                <t:image url="${image.getUrl()}" create_time="${image.getCreate_time()}"  />
+            <c:forEach var="image" items="${images}">
+                <t:image url="${image.getUrl()}" create_time="${image.getCreated_at()}"  />
             </c:forEach>
         </div>
     </jsp:body>

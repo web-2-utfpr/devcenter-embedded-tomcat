@@ -5,7 +5,7 @@
  */
 package model.repository;
 
-import database.HibernateUtil;
+import util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

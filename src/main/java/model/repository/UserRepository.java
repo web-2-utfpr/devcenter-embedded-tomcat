@@ -53,6 +53,20 @@ public class UserRepository extends Repository {
             closeSession();
         }
     }
+    
+    public Usuario login2(String nome, String senha) throws InvalidPasswordException, UserNotFoundException {
+        try {
+            beginSession();
+            Usuario user = findByUsername(nome);
+            if (BCrypt.checkpw(senha, user.getSenha())) {
+                return user;
+            } else {
+                throw new InvalidPasswordException();
+            }
+        } finally {
+            closeSession();
+        }
+    }
 
     public List<Usuario> search(String username) {
         List<Usuario> users = new ArrayList<>();

@@ -8,8 +8,8 @@
             <span class="red-text">${error}</span>
             <h5>feed page ${page}</h5>
             <c:forEach var="image" items="${images}">
-                <a href="/profile?u=${image.getUsuario()}">
-                    <t:image url="${image.getUrl()}" create_time="${image.getCreate_time()}" nome="${image.getUsuario()}" />
+                <a href="/profile?u=${image.getUser().getNome()}">
+                    <t:image url="${image.getUrl()}" create_time="${image.getCreated_at()}" nome="${image.getUser().getNome()}" />
                 </a>
             </c:forEach>
             <a href="/feed?p=${page-1}"><</a>

@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.service.ImagemService;
-import model.service.UsuarioService;
-import org.javalite.activejdbc.Model;
+import model.bean.Usuario;
+import model.repository.ImageRepository;
+import model.repository.UserRepository;
+import util.FileHelper;
+import util.imgur.Uploader;
 
 @WebServlet(
         name = "Profile",
@@ -23,6 +25,14 @@ public class ProfileServlet extends HttpServlet {
 
     Context context;
 
+    private static UserRepository userRepository;
+    private static ImageRepository imageRepository;
+
+    static {
+        userRepository = new UserRepository();
+        imageRepository = new ImageRepository();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -33,10 +43,11 @@ public class ProfileServlet extends HttpServlet {
 
         if (username == null) {
             req.setAttribute("user", context.getLoggedUser());
+            req.setAttribute("images", imageRepository.findByUsername(context.getLoggedUser().getNome()));
         } else {
             try {
-                Model user = UsuarioService.findByUsername(username);
-                req.setAttribute("user", user);
+                req.setAttribute("user", userRepository.findByUsername(username));
+                req.setAttribute("images", imageRepository.findByUsername(username));
             } catch (Exception e) {
                 req.setAttribute("error", e.getMessage());
             }
@@ -49,11 +60,8 @@ public class ProfileServlet extends HttpServlet {
             throws ServletException, IOException {
 
         context = new Context(req, resp);
-
-        ImagemService.newImage(context.getLoggedUser().getLongId(), req.getPart("imagem"));
-        
+        imageRepository.newImage(context.getLoggedUser(), Uploader.upload(FileHelper.SaveImage(req.getPart("imagem"))));
         context.Redirect("profile");
-
     }
 
 }

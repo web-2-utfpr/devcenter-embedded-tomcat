@@ -10,18 +10,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.service.UsuarioService;
-import org.javalite.activejdbc.Model;
+import model.bean.Usuario;
+import model.repository.UserRepository;
 
 @WebServlet(
         name = "Login",
         urlPatterns = {"/login"}
 )
 public class LoginServlet extends HttpServlet {
-    
+
     private static final String USER_NOT_REGISTERED = "userNotRegistered";
     private static final String USER_WRONG_PASSWORD = "userWrongPassword";
-            
+
+    private static UserRepository userRepository;
+
+    static {
+        userRepository = new UserRepository();
+    }
+
     Context context;
     ResourceBundle messages = ResourceBundle.getBundle("Messages");
 
@@ -34,10 +40,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        
+
         context = new Context(req, resp);
         try {
-            Model user = UsuarioService.login(req.getParameter("username"), req.getParameter("password"));
+            Usuario user = userRepository.login2(req.getParameter("username"), req.getParameter("password"));
             context.setLoggedUser(user);
             resp.sendRedirect("feed");
         } catch (UserNotFoundException ex) {
@@ -47,6 +53,6 @@ public class LoginServlet extends HttpServlet {
             req.setAttribute("error", messages.getString(USER_WRONG_PASSWORD));
             context.Dispatch("/login.jsp");
         }
-        
+
     }
 }
