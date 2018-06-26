@@ -16,12 +16,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  *
  * @author rafae
  */
+
 @Entity
+@Cache(region="common", usage = CacheConcurrencyStrategy.READ_WRITE) 
 @Table(name = "images")
 public class Image implements Serializable {
 

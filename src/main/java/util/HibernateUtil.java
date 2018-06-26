@@ -61,6 +61,12 @@ public class HibernateUtil {
 
                 settings.put(Environment.C3P0_CONFIG_PREFIX + ".initialPoolSize", 5);
 
+                settings.put(Environment.USE_SECOND_LEVEL_CACHE, true);
+                settings.put(Environment.USE_QUERY_CACHE, true);
+                settings.put(Environment.CACHE_REGION_FACTORY, org.hibernate.cache.redis.hibernate52.SingletonRedisRegionFactory.class.getName());
+                settings.put(Environment.CACHE_REGION_PREFIX, "hibernate");
+                settings.put(Environment.CACHE_PROVIDER_CONFIG, "hibernate-redis.properties");
+                
                 registryBuilder.applySettings(settings);
 
                 registry = registryBuilder.build();

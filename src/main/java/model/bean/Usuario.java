@@ -12,12 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  *
  * @author rafae
  */
 @Entity
+@Cache(region="common", usage = CacheConcurrencyStrategy.READ_WRITE) 
 @Table(name = "users")
 public class Usuario implements Serializable {
 
