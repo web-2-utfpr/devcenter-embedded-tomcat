@@ -43,11 +43,12 @@ public class ProfileServlet extends HttpServlet {
 
         if (username == null) {
             req.setAttribute("user", context.getLoggedUser());
-            req.setAttribute("images", imageRepository.findByUsername(context.getLoggedUser().getNome()));
+            req.setAttribute("images", imageRepository.findByUser(context.getLoggedUser()));
         } else {
             try {
-                req.setAttribute("user", userRepository.findByUsername(username));
-                req.setAttribute("images", imageRepository.findByUsername(username));
+                Usuario user = userRepository.findByUsername(username);
+                req.setAttribute("user", user);
+                req.setAttribute("images", imageRepository.findByUser(user));
             } catch (Exception e) {
                 req.setAttribute("error", e.getMessage());
             }

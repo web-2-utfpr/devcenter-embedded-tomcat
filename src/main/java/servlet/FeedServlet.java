@@ -32,7 +32,7 @@ public class FeedServlet extends HttpServlet {
         context = new Context(req, resp);
 
         try {
-            int page = p != null ? Integer.parseInt(p) : 1;
+            int page = p != null ? Integer.parseInt(p) : 0;
             req.setAttribute("user", context.getLoggedUser());
             req.setAttribute("images", imageRepository.getAllPhotos(page * PAGESIZE, PAGESIZE));
             req.setAttribute("page", page);

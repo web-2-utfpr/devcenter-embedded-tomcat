@@ -45,12 +45,12 @@ public class ImageRepository extends Repository {
         return 0;
     }
 
-    public List<Image> findByUsername(String username) {
+    public List<Image> findByUser(Usuario user) {
         List<Image> images = new ArrayList<>();
         try {
             beginSession();
-            images = session.createQuery("FROM Image AS i JOIN FETCH i.user WHERE i.user.nome = :nome ORDER BY i.created_at DESC")
-                    .setParameter("nome", username)
+            images = session.createQuery("FROM Image AS i JOIN FETCH i.user WHERE i.user.id = :id ORDER BY i.created_at DESC")
+                    .setParameter("id", user.getId())
                     .list();
         } finally {
             closeSession();

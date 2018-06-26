@@ -5,13 +5,12 @@
  */
 package api;
 
-import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import model.bean.Image;
+import javax.ws.rs.core.Response;
 import model.repository.ImageRepository;
 
 @Path("/feed")
@@ -27,8 +26,8 @@ public class Feed {
     
     @GET
     @Path("/{page}")
-    public List<Image> getMsg(@PathParam("page") int page) {
-        return imageRepository.getAllPhotos(page * PAGESIZE, PAGESIZE);
+    public Response getMsg(@PathParam("page") int page) {
+        return Response.ok().entity(imageRepository.getAllPhotos(page * PAGESIZE, PAGESIZE)).build();
     }
 
 }

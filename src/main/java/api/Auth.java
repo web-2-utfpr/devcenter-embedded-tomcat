@@ -6,6 +6,7 @@
 package api;
 
 import exception.EmailAlreadyRegisteredException;
+import exception.ExceptionUtil;
 import exception.InvalidPasswordException;
 import exception.UserAlreadyExistsException;
 import exception.UserNotFoundException;
@@ -17,7 +18,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.repository.UserRepository;
-import util.Data;
+import org.json.JSONObject;
 
 /**
  *
@@ -36,22 +37,26 @@ public class Auth {
     @POST
     @Path("/login")
     @Consumes("application/x-www-form-urlencoded")
-    public Object login(@FormParam("nome") String nome, @FormParam("senha") String senha) {
+    public Response login(@FormParam("nome") String nome, @FormParam("senha") String senha) {
         try {
-            return new Data(userRepository.login(nome, senha));
+            JSONObject response = new JSONObject();
+            response.put("token", userRepository.login(nome, senha));
+            return Response.ok().entity(response.toString()).build();
         } catch (InvalidPasswordException | UserNotFoundException ex) {
-            return Response.status(Response.Status.UNAUTHORIZED).build();
+            return ExceptionUtil.errorToResponse(ex);
         }
     }
 
     @POST
     @Path("/register")
     @Consumes("application/x-www-form-urlencoded")
-    public Object register(@FormParam("nome") String nome, @FormParam("senha") String senha, @FormParam("email") String email) {
+    public Response register(@FormParam("nome") String nome, @FormParam("senha") String senha, @FormParam("email") String email) {
         try {
-            return new Data(userRepository.registrar(nome, email, senha));
-        } catch (EmailAlreadyRegisteredException | UserAlreadyExistsException e) {
-            return Response.status(201).build();
+            JSONObject response = new JSONObject();
+            response.put("token", userRepository.registrar(nome, email, senha));
+            return Response.ok().entity(response.toString()).build();
+        } catch (UserAlreadyExistsException | EmailAlreadyRegisteredException ex) {
+            return ExceptionUtil.errorToResponse(ex);
         }
     }
 }
