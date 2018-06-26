@@ -53,7 +53,7 @@ public class Auth {
     public Response register(@FormParam("nome") String nome, @FormParam("senha") String senha, @FormParam("email") String email) {
         try {
             JSONObject response = new JSONObject();
-            response.put("token", userRepository.registrar(nome, email, senha));
+            response.put("register", userRepository.registrar(nome, email, senha));
             return Response.ok().entity(response.toString()).build();
         } catch (UserAlreadyExistsException | EmailAlreadyRegisteredException ex) {
             return ExceptionUtil.errorToResponse(ex);
