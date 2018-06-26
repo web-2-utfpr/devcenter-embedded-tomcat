@@ -4,43 +4,39 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import database.Database;
-import org.javalite.activejdbc.Model;
+import model.bean.Usuario;
 
 public class Context {
 
     HttpServletRequest request;
     HttpServletResponse response;
-    Model loggedUser;
+    Usuario loggedUser;
 
     public Context(HttpServletRequest req, HttpServletResponse resp) {
         request = req;
         response = resp;
-        Database.Open();
-        loggedUser = (Model) request.getSession().getAttribute("loggedUser");
+        loggedUser = (Usuario) request.getSession().getAttribute("loggedUser");
     }
 
     public boolean estaLogado() {
         return loggedUser != null;
     }
 
-    public void setLoggedUser(Model loggedUser) {
+    public void setLoggedUser(Usuario loggedUser) {
         request.getSession(true).setAttribute("loggedUser", loggedUser);
         this.loggedUser = loggedUser;
     }
 
-    public Model getLoggedUser() {
+    public Usuario getLoggedUser() {
         return loggedUser;
     }
 
     public void Dispatch(String page) throws ServletException, IOException {
         request.getRequestDispatcher(page).forward(request, response);
-        Database.Close();
     }
     
     public void Redirect(String page) throws IOException {
         response.sendRedirect(page);
-        Database.Close();
     }
 
 }

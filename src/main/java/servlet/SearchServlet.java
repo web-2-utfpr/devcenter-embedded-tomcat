@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.service.UsuarioService;
+import model.repository.UserRepository;
 
 /**
  *
@@ -26,12 +26,18 @@ public class SearchServlet extends HttpServlet {
 
     Context context;
 
+    private static UserRepository userRepository;
+
+    static {
+        userRepository = new UserRepository();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         context = new Context(req, resp);
-        req.setAttribute("users", UsuarioService.search(req.getParameter("q")));
+        req.setAttribute("users", userRepository.search(req.getParameter("q")));
         req.setAttribute("q", req.getParameter("q"));
         context.Dispatch("/search.jsp");
 
