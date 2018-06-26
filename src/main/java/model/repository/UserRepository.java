@@ -47,13 +47,13 @@ public class UserRepository extends Repository {
                 String token = JWTUtil.create(String.valueOf(user.getId()));
                 return token;
             } else {
-                throw new InvalidPasswordException();
+                throw new InvalidPasswordException("Invalid password");
             }
         } finally {
             closeSession();
         }
     }
-    
+
     public Usuario login2(String nome, String senha) throws InvalidPasswordException, UserNotFoundException {
         try {
             beginSession();
@@ -61,7 +61,7 @@ public class UserRepository extends Repository {
             if (BCrypt.checkpw(senha, user.getSenha())) {
                 return user;
             } else {
-                throw new InvalidPasswordException();
+                throw new InvalidPasswordException("Invalid password");
             }
         } finally {
             closeSession();
@@ -76,7 +76,7 @@ public class UserRepository extends Repository {
                     .setParameter("nome", username + "%")
                     .list());
             for (Object obj : list) {
-                users.add(setUser((JSONObject)(obj)));
+                users.add(setUser((JSONObject) (obj)));
             }
         } finally {
             closeSession();
@@ -87,10 +87,13 @@ public class UserRepository extends Repository {
     public Usuario findByUsername(String username) throws UserNotFoundException {
         try {
             beginSession();
-            JSONObject user = new JSONObject(session.createQuery("FROM Usuario AS u WHERE u.nome = :nome")
+            List list = session.createQuery("FROM Usuario AS u WHERE u.nome = :nome")
                     .setParameter("nome", username)
-                    .list().get(0));
-            return setUser(user);
+                    .list();
+            if (list.isEmpty()) {
+                throw new UserNotFoundException("User not found");
+            }
+            return setUser(new JSONObject(list.get(0)));
         } finally {
             closeSession();
         }
@@ -99,10 +102,13 @@ public class UserRepository extends Repository {
     public Usuario findById(Long id) throws UserNotFoundException {
         try {
             beginSession();
-            JSONObject user = new JSONObject(session.createQuery("FROM Usuario AS u WHERE u.id = :id")
+            List list = session.createQuery("FROM Usuario AS u WHERE u.id = :id")
                     .setParameter("id", id)
-                    .list().get(0));
-            return setUser(user);
+                    .list();
+            if (list.isEmpty()) {
+                throw new UserNotFoundException("User not found");
+            }
+            return setUser(new JSONObject(list.get(0)));
         } finally {
             closeSession();
         }
