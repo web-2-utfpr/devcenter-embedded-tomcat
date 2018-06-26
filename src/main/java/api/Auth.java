@@ -7,7 +7,9 @@ package api;
 
 import exception.EmailAlreadyRegisteredException;
 import exception.ExceptionUtil;
+import exception.InvalidEmailException;
 import exception.InvalidPasswordException;
+import exception.InvalidUsernameException;
 import exception.UserAlreadyExistsException;
 import exception.UserNotFoundException;
 import javax.ws.rs.Consumes;
@@ -55,7 +57,7 @@ public class Auth {
             JSONObject response = new JSONObject();
             response.put("register", userRepository.registrar(nome, email, senha));
             return Response.ok().entity(response.toString()).build();
-        } catch (UserAlreadyExistsException | EmailAlreadyRegisteredException ex) {
+        } catch (UserAlreadyExistsException | EmailAlreadyRegisteredException | InvalidUsernameException | InvalidEmailException | InvalidPasswordException ex) {
             return ExceptionUtil.errorToResponse(ex);
         }
     }
