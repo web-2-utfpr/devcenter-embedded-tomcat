@@ -6,7 +6,9 @@
 package model.repository;
 
 import exception.EmailAlreadyRegisteredException;
+import exception.InvalidEmailException;
 import exception.InvalidPasswordException;
+import exception.InvalidUsernameException;
 import exception.UserAlreadyExistsException;
 import exception.UserNotFoundException;
 import java.util.ArrayList;
@@ -16,6 +18,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
 import util.JWTUtil;
+import validator.EmailValidator;
+import validator.PasswordValidator;
+import validator.UsernameValidator;
 
 /**
  *
@@ -23,9 +28,24 @@ import util.JWTUtil;
  */
 public class UserRepository extends Repository {
 
-    public String registrar(String nome, String email, String senha) throws UserAlreadyExistsException, EmailAlreadyRegisteredException {
+    public String registrar(String nome, String email, String senha) throws UserAlreadyExistsException, EmailAlreadyRegisteredException, InvalidUsernameException, InvalidEmailException, InvalidPasswordException {
         try {
+            UsernameValidator.isValid(nome);
+            EmailValidator.isValid(email);
+            PasswordValidator.isValid(senha);
             beginSession();
+            List list = session.createQuery("FROM Usuario AS u WHERE u.nome = :nome").setParameter("nome", nome).list();
+
+            if (!list.isEmpty()) {
+                throw new UserAlreadyExistsException("Username already registered");
+            }
+
+            list = session.createQuery("FROM Usuario AS u WHERE u.email = :email").setParameter("email", email).list();
+
+            if (!list.isEmpty()) {
+                throw new EmailAlreadyRegisteredException("Email already registered");
+            }
+
             transaction = session.beginTransaction();
             session.createNativeQuery("INSERT INTO users (nome, email, senha) VALUES (:nome, :email, :senha)")
                     .setParameter("nome", nome)
@@ -33,7 +53,7 @@ public class UserRepository extends Repository {
                     .setParameter("senha", BCrypt.hashpw(senha, BCrypt.gensalt()))
                     .executeUpdate();
             transaction.commit();
-            return JWTUtil.create(nome);
+            return "User " + nome + " registered";
         } finally {
             closeSession();
         }
