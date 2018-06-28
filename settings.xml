@@ -9,7 +9,7 @@
        <repository>
          <id>my-repo2</id>
          <name>your custom repo</name>
-         <url>http://jarsm2.dyndns.dk</url>
+         <urlhttps://oss.sonatype.org/content/repositories/releases/</url>
        </repository>
      </repositories>
    </profile>
