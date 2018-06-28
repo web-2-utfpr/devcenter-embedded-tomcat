@@ -10,7 +10,7 @@
     <properties>
         <tomcat.version>8.5.30</tomcat.version>
         <activejdbc.version>2.0</activejdbc.version>
-        <hibernate.version>4.3.4.Final</hibernate.version>
+        <hibernate.version>4.2.10.Final</hibernate.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
@@ -64,20 +64,20 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.4.Final</version>
+            <version>4.2.10.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-        <dependency>
+   <!--      <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-java8</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
 
-        <!-- c3p0 -->
+         c3p0 -->
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
