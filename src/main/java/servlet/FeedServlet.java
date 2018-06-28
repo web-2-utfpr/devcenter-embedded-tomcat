@@ -18,7 +18,7 @@ public class FeedServlet extends HttpServlet {
     Context context;
 
     private static ImageRepository imageRepository;
-    private static int PAGESIZE = 3;
+    private static int PAGESIZE = 9;
 
     static {
         imageRepository = new ImageRepository();

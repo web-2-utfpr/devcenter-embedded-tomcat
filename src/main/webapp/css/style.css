@@ -61,3 +61,21 @@ footer {
 .add-imagem {
     display: inline-block;
 }
+
+.photo-grid-container {
+  display: flex;
+  justify-content: center;
+}
+
+.photo-grid {
+  width: 1100px;
+  display: flex;
+  justify-content: space-between;    /* Change this */
+  flex-wrap: wrap;
+}
+
+.photo-grid-item {
+  border: 0px solid #fff;
+  width: 300px;
+  height: 400px;
+}

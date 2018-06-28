@@ -3,10 +3,10 @@
 <%@ attribute name="create_time" %>
 <%@ attribute name="nome" %>
 
-<div class="card white-text light-blue">
+<div class="card black-text light-blue">
 
     <div class="card-image">
-        <img src="${url}" width="400px">
+        <img src="${url}" width="300px"  height="300px>
     </div>
     <div class="row">
         <div class="col left">
