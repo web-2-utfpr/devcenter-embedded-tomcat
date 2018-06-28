@@ -63,7 +63,7 @@ public class HibernateUtil {
                 settings.put(Environment.USE_SECOND_LEVEL_CACHE, true);
                 settings.put(Environment.USE_QUERY_CACHE, true);
                 settings.put(Environment.CACHE_REGION_FACTORY, SingletonRedisRegionFactory.class.getName());
-                settings.put(Environment.CACHE_REGION_PREFIX, "hibernate");
+                settings.put(Environment.CACHE_REGION_PREFIX, "common");
 
                 // optional setting for second level cache statistics
                 settings.put(Environment.GENERATE_STATISTICS, "true");
