@@ -4,12 +4,18 @@
 
 <t:wrapper title="${user.getNome()}'s feed">
     <jsp:body>
-        <div class="row center feed">
-            <span class="red-text">${error}</span>
-            <h3><a href="mailto:${user.getEmail()}">${user.getNome()}</a></h3>
-            <c:forEach var="image" items="${images}">
-                <t:image url="${image.getUrl()}" create_time="${image.getCreated_at()}"  />
-            </c:forEach>
+        <span class="red-text">${error}</span>
+        <h3>${user.getNome()}</h3>
+        <h6>${user.getEmail()}</h6>
+        <div class="photo-grid-container">
+            <div class="photo-grid">
+                <c:forEach var="image" items="${images}">
+                    <div class='photo-grid-item'>
+                        <t:image url="${image.getUrl()}" create_time="${image.getCreated_at()}"  />
+                    </div>
+                </c:forEach>
+            </div>
         </div>
-    </jsp:body>
+    </div>
+</jsp:body>
 </t:wrapper>
