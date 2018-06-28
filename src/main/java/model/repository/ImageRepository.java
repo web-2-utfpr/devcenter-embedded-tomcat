@@ -34,7 +34,7 @@ public class ImageRepository extends Repository {
         try {
             beginSession();
             transaction = session.beginTransaction();
-            session.createNativeQuery("INSERT INTO images (user_id, url) VALUES (:user_id, :url)")
+            session.createQuery("INSERT INTO images (user_id, url) VALUES (:user_id, :url)")
                     .setParameter("user_id", user.getId())
                     .setParameter("url", url)
                     .executeUpdate();

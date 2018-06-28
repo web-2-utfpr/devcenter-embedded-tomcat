@@ -11,15 +11,14 @@ import model.bean.Image;
 import model.bean.Usuario;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
+import org.hibernate.metamodel.Metadata;
+import org.hibernate.metamodel.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
+import org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory;
+import org.hibernate.cache.redis.SingletonRedisRegionFactory;
 
-/**
- * @author imssbora
- */
 public class HibernateUtil {
 
     private static StandardServiceRegistry registry;
@@ -60,6 +59,20 @@ public class HibernateUtil {
                 settings.put(Environment.C3P0_MAX_STATEMENTS, 150); //PreparedStatement cache size
 
                 settings.put(Environment.C3P0_CONFIG_PREFIX + ".initialPoolSize", 5);
+                // Secondary Cache
+                settings.put(Environment.USE_SECOND_LEVEL_CACHE, true);
+                settings.put(Environment.USE_QUERY_CACHE, true);
+                settings.put(Environment.CACHE_REGION_FACTORY, SingletonRedisRegionFactory.class.getName());
+                settings.put(Environment.CACHE_REGION_PREFIX, "hibernate");
+
+                // optional setting for second level cache statistics
+                settings.put(Environment.GENERATE_STATISTICS, "true");
+                settings.put(Environment.USE_STRUCTURED_CACHE, "true");
+
+                settings.put(Environment.TRANSACTION_STRATEGY, JdbcTransactionFactory.class.getName());
+
+                // configuration for Redis that used by hibernate
+                settings.put(Environment.CACHE_PROVIDER_CONFIG, "hibernate-redis.properties");
 
                 registryBuilder.applySettings(settings);
 

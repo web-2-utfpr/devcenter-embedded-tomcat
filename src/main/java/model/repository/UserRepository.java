@@ -27,7 +27,7 @@ public class UserRepository extends Repository {
         try {
             beginSession();
             transaction = session.beginTransaction();
-            session.createNativeQuery("INSERT INTO users (nome, email, senha) VALUES (:nome, :email, :senha)")
+            session.createQuery("INSERT INTO users (nome, email, senha) VALUES (:nome, :email, :senha)")
                     .setParameter("nome", nome)
                     .setParameter("email", email)
                     .setParameter("senha", BCrypt.hashpw(senha, BCrypt.gensalt()))
