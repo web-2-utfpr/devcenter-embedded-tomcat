@@ -2,6 +2,24 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:wrapper title="Register">
+    <jsp:attribute name="scripts">
+         <script>
+             var password = document.getElementById("password")
+             var confirm_password = document.getElementById("confirm_password");
+
+             function validatePassword(){
+                 if(password.value != confirm_password.value) {
+                     confirm_password.setCustomValidity("Passwords Don't Match");
+                 } else {
+                     confirm_password.setCustomValidity('');
+                 }
+             }
+
+             password.onchange = validatePassword;
+             confirm_password.onkeyup = validatePassword;
+         </script>
+    </jsp:attribute>
+
     <jsp:body>
         <div class="row center-align feed">
             <div class="row">
@@ -15,6 +33,10 @@
                 <div class="input-field row">
                     <label for="password">${labels["passwordLabel"]}</label>
                     <input type="password" class="validate" name="password" id="password" required/>
+                </div>
+                <div class="input-field row">
+                    <label for="confirm_password">${labels["passwordConfirmationLabel"]}</label>
+                    <input type="password" class="validate" name="confirm_password" id="confirm_password" required/>
                 </div>
                 <div class="input-field row">
                     <label for="email">Email</label>
