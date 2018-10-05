@@ -28,7 +28,7 @@
             <form action="register" method="POST" class="col form-login">
                 <div class="input-field row">
                     <label for="username">${labels["usernameLabel"]}</label>
-                    <input type="text" class="validate" name="username" id="username" required/>
+                    <input type="text" value="${username}" class="validate" name="username" id="username" required/>
                 </div>
                 <div class="input-field row">
                     <label for="password">${labels["passwordLabel"]}</label>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="input-field row">
                     <label for="email">Email</label>
-                    <input type="email" class="validate" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
+                    <input type="email" value="${email}" class="validate" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
                 </div>
                 <div class="row card-action">
                     <input type="reset" value=${labels["reset"]} id="reset" class="btn-flat grey-text">
