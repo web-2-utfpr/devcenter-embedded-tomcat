@@ -26,6 +26,8 @@ public class RegisterServlet extends HttpServlet {
 
     Context context;
 
+    private static final String PASSWORDS_NOT_MATCH = "passwordsNotMatch";
+
     private static UserRepository userRepository;
 
     static {
@@ -51,8 +53,10 @@ public class RegisterServlet extends HttpServlet {
         String username = req.getParameter("username");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        String confirm_password = req.getParameter("confirm_password");
 
         try {
+            if (!password.equals(confirm_password)) throw new InvalidPasswordException(messages.getString(PASSWORDS_NOT_MATCH));
             userRepository.registrar(username, email, password);
             req.setAttribute("msg", messages.getString("registerSuccess"));
             context.Dispatch("/login.jsp");
