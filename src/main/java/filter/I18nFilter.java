@@ -28,9 +28,15 @@ public class I18nFilter implements Filter  {
     public void destroy () {}
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        
-        Locale.setDefault(((HttpServletRequest)req).getLocale());
-        
+
+        String current = req.getLocale().toString();
+
+        if (current.contains("pt")) {
+            Locale.setDefault(new Locale("pt", "BR"));
+        } else {
+            Locale.setDefault(Locale.US);
+        }
+
         ResourceBundle messages = ResourceBundle.getBundle("Messages");
         
         Enumeration<String> keys = messages.getKeys();
