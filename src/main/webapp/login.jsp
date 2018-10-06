@@ -20,8 +20,8 @@
                     <input type="password" value="${password}" name="password" id="password" required/>
                 </div>
                 <div class="row card-action">
-                    <input type="reset" id="reset" value=${labels["reset"]} class="btn-flat grey-text">
-                    <input type="submit" value=${labels["login"]} class="btn green waves-light">
+                    <input type="reset" id="reset" value="${labels["reset"]}" class="btn-flat grey-text">
+                    <input type="submit" value="${labels["login"]}" class="btn green waves-light">
                 </div>
             </form>
         </div>

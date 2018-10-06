@@ -43,8 +43,8 @@
                     <input type="email" value="${email}" class="validate" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
                 </div>
                 <div class="row card-action">
-                    <input type="reset" value=${labels["reset"]} id="reset" class="btn-flat grey-text">
-                    <input type="submit" value=${labels["register"]} id="singup" class="btn green waves-light" value="Signup">
+                    <input type="reset" value="${labels["reset"]}" id="reset" class="btn-flat grey-text">
+                    <input type="submit" value="${labels["register"]}" id="singup" class="btn green waves-light" value="Signup">
                 </div>
             </form>
         </div>
