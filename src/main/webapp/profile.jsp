@@ -16,6 +16,5 @@
                 </c:forEach>
             </div>
         </div>
-    </div>
-</jsp:body>
+    </jsp:body>
 </t:wrapper>
