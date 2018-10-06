@@ -1,5 +1,7 @@
 package util;
 
+import exception.InvalidImageException;
+
 import java.io.File;
 import java.io.IOException;
 import javax.servlet.http.Part;
@@ -8,7 +10,7 @@ public class FileHelper {
 
     private static final String SAVE_DIR = "uploadFiles";
 
-    public static File SaveImage(Part imagem) throws IOException {
+    public static File SaveImage(Part imagem) throws InvalidImageException, IOException {
         // gets absolute path of the web application
         String appPath = System.getProperty("user.dir");
 
@@ -22,10 +24,21 @@ public class FileHelper {
         }
         String fileName = extractFileName(imagem);
         // refines the fileName in case it is an absolute path
-        fileName = new File(fileName).getName();
-        imagem.write(savePath + File.separator + fileName);
-        return new File(savePath + File.separator + fileName);
 
+        File image = new File(fileName);
+
+        fileName = image.getName();
+
+        switch (getFileExtension(image)) {
+            case "png":
+            case "jpg":
+            case "gif":
+            case "jpeg":
+                imagem.write(savePath + File.separator + fileName);
+                return new File(savePath + File.separator + fileName);
+            default:
+                throw new InvalidImageException();
+        }
     }
 
     private static String extractFileName(Part part) {
@@ -37,6 +50,16 @@ public class FileHelper {
             }
         }
         return "";
+    }
+
+    private static String getFileExtension(File file) {
+        if (file == null) {
+            return "";
+        }
+        String name = file.getName();
+        int i = name.lastIndexOf('.');
+        String ext = i > 0 ? name.substring(i + 1) : "";
+        return ext;
     }
 
 }

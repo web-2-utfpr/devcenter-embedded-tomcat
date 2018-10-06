@@ -1,5 +1,6 @@
 package servlet;
 
+import exception.InvalidImageException;
 import util.Context;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -61,7 +62,12 @@ public class ProfileServlet extends HttpServlet {
             throws ServletException, IOException {
 
         context = new Context(req, resp);
-        imageRepository.newImage(context.getLoggedUser(), Uploader.upload(FileHelper.SaveImage(req.getPart("imagem"))));
+        try {
+            imageRepository.newImage(context.getLoggedUser(), Uploader.upload(FileHelper.SaveImage(req.getPart("imagem"))));
+        } catch (InvalidImageException e) {
+            System.out.println(e.getMessage());
+            req.setAttribute("error", e.getMessage());
+        }
         context.Redirect("profile");
     }
 
