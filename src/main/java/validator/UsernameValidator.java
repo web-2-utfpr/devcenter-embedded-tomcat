@@ -15,7 +15,7 @@ public class UsernameValidator {
 
     public static void isValid(String username) throws InvalidUsernameException {
         if (username == null || !(username.matches("^[a-zA-Z]+[0-9]*$"))) {
-            throw new InvalidUsernameException("Invalid Username");
+            throw new InvalidUsernameException();
         }
     }
 }

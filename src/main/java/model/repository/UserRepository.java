@@ -37,13 +37,13 @@ public class UserRepository extends Repository {
             List list = session.createQuery("FROM Usuario AS u WHERE u.nome = :nome").setParameter("nome", nome).list();
 
             if (!list.isEmpty()) {
-                throw new UserAlreadyExistsException("Username already registered");
+                throw new UserAlreadyExistsException();
             }
 
             list = session.createQuery("FROM Usuario AS u WHERE u.email = :email").setParameter("email", email).list();
 
             if (!list.isEmpty()) {
-                throw new EmailAlreadyRegisteredException("Email already registered");
+                throw new EmailAlreadyRegisteredException();
             }
 
             transaction = session.beginTransaction();
@@ -67,7 +67,7 @@ public class UserRepository extends Repository {
                 String token = JWTUtil.create(String.valueOf(user.getId()));
                 return token;
             } else {
-                throw new InvalidPasswordException("Invalid password");
+                throw new InvalidPasswordException();
             }
         } finally {
             closeSession();
@@ -81,7 +81,7 @@ public class UserRepository extends Repository {
             if (BCrypt.checkpw(senha, user.getSenha())) {
                 return user;
             } else {
-                throw new InvalidPasswordException("Invalid password");
+                throw new InvalidPasswordException();
             }
         } finally {
             closeSession();
@@ -111,7 +111,7 @@ public class UserRepository extends Repository {
                     .setParameter("nome", username)
                     .list();
             if (list.isEmpty()) {
-                throw new UserNotFoundException("User not found");
+                throw new UserNotFoundException();
             }
             return setUser(new JSONObject(list.get(0)));
         } finally {
@@ -126,7 +126,7 @@ public class UserRepository extends Repository {
                     .setParameter("id", id)
                     .list();
             if (list.isEmpty()) {
-                throw new UserNotFoundException("User not found");
+                throw new UserNotFoundException();
             }
             return setUser(new JSONObject(list.get(0)));
         } finally {

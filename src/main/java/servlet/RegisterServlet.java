@@ -24,8 +24,6 @@ public class RegisterServlet extends HttpServlet {
 
     Context context;
 
-    private static final String PASSWORDS_NOT_MATCH = "passwordsNotMatch";
-
     private static UserRepository userRepository;
 
     static {
@@ -54,35 +52,39 @@ public class RegisterServlet extends HttpServlet {
         String confirm_password = req.getParameter("confirm_password");
 
         try {
-            if (!password.equals(confirm_password)) throw new PasswordsNotMatchException(messages.getString(PASSWORDS_NOT_MATCH));
+            if (!password.equals(confirm_password)) throw new PasswordsNotMatchException();
             userRepository.registrar(username, email, password);
             req.setAttribute("msg", messages.getString("registerSuccess"));
             context.Dispatch("/login.jsp");
         } catch (UserAlreadyExistsException ex) {
+            req.setAttribute("username", username);
             req.setAttribute("email", email);
-            req.setAttribute("error", messages.getString("userAlreadyExists"));
+            req.setAttribute("error", ex.getMessage());
             context.Dispatch("/register.jsp");
         } catch (EmailAlreadyRegisteredException ex) {
             req.setAttribute("username", username);
-            req.setAttribute("error", messages.getString("emailInUse"));
+            req.setAttribute("email", email);
+            req.setAttribute("error", ex.getMessage());
             context.Dispatch("/register.jsp");
         } catch (InvalidUsernameException ex) {
+            req.setAttribute("username", username);
             req.setAttribute("email", email);
-            req.setAttribute("error", messages.getString("invalidName"));
+            req.setAttribute("error", ex.getMessage());
             context.Dispatch("/register.jsp");
         } catch (InvalidEmailException ex) {
             req.setAttribute("username", username);
-            req.setAttribute("error", messages.getString("invalidEmail"));
+            req.setAttribute("email", email);
+            req.setAttribute("error", ex.getMessage());
             context.Dispatch("/register.jsp");
         } catch (InvalidPasswordException ex) {
             req.setAttribute("username", username);
             req.setAttribute("email", email);
-            req.setAttribute("error", messages.getString("invalidPassword"));
+            req.setAttribute("error", ex.getMessage());
             context.Dispatch("/register.jsp");
-        } catch (PasswordsNotMatchException e) {
+        } catch (PasswordsNotMatchException ex) {
             req.setAttribute("username", username);
             req.setAttribute("email", email);
-            req.setAttribute("error", messages.getString(PASSWORDS_NOT_MATCH));
+            req.setAttribute("error", ex.getMessage());
             context.Dispatch("/register.jsp");
         }
 

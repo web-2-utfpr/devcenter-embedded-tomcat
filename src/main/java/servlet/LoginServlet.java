@@ -19,9 +19,6 @@ import model.repository.UserRepository;
 )
 public class LoginServlet extends HttpServlet {
 
-    private static final String USER_NOT_REGISTERED = "userNotRegistered";
-    private static final String USER_WRONG_PASSWORD = "userWrongPassword";
-
     private static UserRepository userRepository;
 
     static {
@@ -29,7 +26,6 @@ public class LoginServlet extends HttpServlet {
     }
 
     Context context;
-    ResourceBundle messages = ResourceBundle.getBundle("Messages");
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -53,12 +49,12 @@ public class LoginServlet extends HttpServlet {
         } catch (UserNotFoundException ex) {
             req.setAttribute("username", username);
             req.setAttribute("password", password);
-            req.setAttribute("error", messages.getString(USER_NOT_REGISTERED));
+            req.setAttribute("error", ex.getMessage());
             context.Dispatch("/login.jsp");
         } catch (InvalidPasswordException ex) {
             req.setAttribute("username", username);
             req.setAttribute("password", password);
-            req.setAttribute("error", messages.getString(USER_WRONG_PASSWORD));
+            req.setAttribute("error", ex.getMessage());
             context.Dispatch("/login.jsp");
         }
 

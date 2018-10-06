@@ -1,9 +1,9 @@
 package exception;
 
-public class InvalidUsernameException extends Exception {
+public class InvalidUsernameException extends BaseException {
 
-    public InvalidUsernameException(String message) {
-        super(message);
+    public InvalidUsernameException() {
+        super(messages.getString("invalidName"));
     }
     
 }

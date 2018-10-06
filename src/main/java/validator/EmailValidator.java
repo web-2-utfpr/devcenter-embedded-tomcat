@@ -15,7 +15,7 @@ public class EmailValidator {
 
     public static void isValid(String email) throws InvalidEmailException {
         if (email == null || !(email.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"))) {
-            throw new InvalidEmailException("Invalid Email");
+            throw new InvalidEmailException();
         }
     }
 }
