@@ -30,6 +30,17 @@ public class ImageRepository extends Repository {
         return images;
     }
 
+    public long imageQuantity(){
+        long quantity;
+        try {
+            beginSession();
+            quantity = ((Long)session.createQuery("SELECT COUNT(*) FROM Image").uniqueResult()).intValue();
+        } finally {
+            closeSession();
+        }
+        return quantity;
+    }
+
     public long newImage(Usuario user, String url) {
         try {
             beginSession();
