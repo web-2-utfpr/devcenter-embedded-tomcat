@@ -42,14 +42,22 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         context = new Context(req, resp);
+
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+
         try {
-            Usuario user = userRepository.login2(req.getParameter("username"), req.getParameter("password"));
+            Usuario user = userRepository.login2(username, password);
             context.setLoggedUser(user);
             resp.sendRedirect("feed");
         } catch (UserNotFoundException ex) {
+            req.setAttribute("username", username);
+            req.setAttribute("password", password);
             req.setAttribute("error", messages.getString(USER_NOT_REGISTERED));
             context.Dispatch("/login.jsp");
         } catch (InvalidPasswordException ex) {
+            req.setAttribute("username", username);
+            req.setAttribute("password", password);
             req.setAttribute("error", messages.getString(USER_WRONG_PASSWORD));
             context.Dispatch("/login.jsp");
         }
