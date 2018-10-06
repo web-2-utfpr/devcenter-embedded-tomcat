@@ -17,8 +17,8 @@
             </div>
         </div>
         <div>
-            <a href="/feed?p=${page-1}"><</a>
-            <a href="/feed?p=${page+1}">></a>
+            <a ${page > 0 ? "" : "style=\"display:none;\""} href="/feed?p=${page-1}"><</a>
+            <a ${hasNextPage ? "" : "style=\"display:none;\""} href="/feed?p=${page+1}">></a>
         </div>
     </jsp:body>
 </t:wrapper>
