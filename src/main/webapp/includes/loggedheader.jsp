@@ -2,7 +2,7 @@
     <div class="nav-wrapper container">
         <div class="add-imagem">
             <form action="profile" method="POST" enctype="multipart/form-data">
-                <input class="btn-flat white-text" value="${labels["image"]}" type="file" name="imagem" accept="image/*" required/>
+                <input id="new_image" class="btn-flat white-text" value="${labels["image"]}" type="file" name="imagem" accept="image/*" required/>
                 <button type="submit" title="${labels["post"]}" class="search-btn btn-flat"><i class="material-icons white-text">backup</i></button></input>
             </form>
         </div>
@@ -30,3 +30,16 @@
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div> 
 </nav>
+
+<script>
+    const image = document.getElementById("new_image")
+    image.onchange = function () {
+        switch(image.value.substring(image.value.lastIndexOf('.') + 1).toLowerCase()){
+            case 'gif': case 'jpg': case 'png': case 'jpeg':
+            break;
+            default:
+                image.value = null;
+                break;
+        }
+    }
+</script>
