@@ -8,7 +8,6 @@ package validator;
 import exception.InvalidEmailException;
 
 /**
- *
  * @author rafae
  */
 public class EmailValidator {

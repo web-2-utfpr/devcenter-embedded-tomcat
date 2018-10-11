@@ -9,22 +9,24 @@
 .icon-block {
     padding: 0 15px;
 }
+
 .icon-block .material-icons {
     font-size: inherit;
 }
 
 nav {
-    position:fixed;
-    left:0px;
-    top:0px;
-    height:64px;
-    width:100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    height: 64px;
+    width: 100%;
 }
 
 .content {
     min-height: calc(100vh - 26px - 64px);
     margin-top: 64px;
 }
+
 footer {
     height: 26px;
 }
@@ -63,19 +65,19 @@ footer {
 }
 
 .photo-grid-container {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .photo-grid {
-  width: 1100px;
-  display: flex;
-  justify-content: space-between;    /* Change this */
-  flex-wrap: wrap;
+    width: 1100px;
+    display: flex;
+    justify-content: space-between; /* Change this */
+    flex-wrap: wrap;
 }
 
 .photo-grid-item {
-  border: 0px solid #fff;
-  width: 300px;
-  height: 400px;
+    border: 0px solid #fff;
+    width: 300px;
+    height: 400px;
 }

@@ -1,20 +1,16 @@
 package servlet;
 
-import exception.EmailAlreadyRegisteredException;
-import exception.InvalidEmailException;
-import exception.InvalidPasswordException;
-import exception.InvalidUsernameException;
-import exception.UserAlreadyExistsException;
-import exception.PasswordsNotMatchException;
+import exception.*;
+import model.repository.UserRepository;
 import util.Context;
-import java.io.IOException;
-import java.util.ResourceBundle;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.repository.UserRepository;
+import java.io.IOException;
+import java.util.ResourceBundle;
 
 @WebServlet(
         name = "Registration",

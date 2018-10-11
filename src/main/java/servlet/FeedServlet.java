@@ -1,15 +1,16 @@
 package servlet;
 
 import model.bean.Image;
+import model.repository.ImageRepository;
 import util.Context;
-import java.io.IOException;
-import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.repository.ImageRepository;
+import java.io.IOException;
+import java.util.List;
 
 @WebServlet(
         name = "Feed",
@@ -40,7 +41,7 @@ public class FeedServlet extends HttpServlet {
             long lastPage = totalImages / PAGESIZE;
 
             int page = p != null ? Integer.parseInt(p) : 0;
-            page = page < 0 ? 0 : page > lastPage ? (int)lastPage : page;
+            page = page < 0 ? 0 : page > lastPage ? (int) lastPage : page;
 
             List<Image> images = imageRepository.getAllPhotos(page * PAGESIZE, PAGESIZE);
 

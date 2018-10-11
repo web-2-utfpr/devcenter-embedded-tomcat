@@ -8,7 +8,6 @@ package validator;
 import exception.InvalidPasswordException;
 
 /**
- *
  * @author rafae
  */
 public class PasswordValidator {

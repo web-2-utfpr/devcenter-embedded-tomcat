@@ -5,14 +5,7 @@
  */
 package model.repository;
 
-import exception.EmailAlreadyRegisteredException;
-import exception.InvalidEmailException;
-import exception.InvalidPasswordException;
-import exception.InvalidUsernameException;
-import exception.UserAlreadyExistsException;
-import exception.UserNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import exception.*;
 import model.bean.Usuario;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,8 +15,10 @@ import validator.EmailValidator;
 import validator.PasswordValidator;
 import validator.UsernameValidator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author rafae
  */
 public class UserRepository extends Repository {

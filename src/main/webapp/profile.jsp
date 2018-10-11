@@ -1,6 +1,6 @@
-<%@page contentType="text/html" pageEncoding="utf-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@page contentType="text/html" pageEncoding="utf-8" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:wrapper title="${user.getNome()}'s feed">
     <jsp:body>
@@ -11,7 +11,7 @@
             <div class="photo-grid">
                 <c:forEach var="image" items="${images}">
                     <div class='photo-grid-item'>
-                        <t:image url="${image.getUrl()}" create_time="${image.getCreated_at()}"  />
+                        <t:image url="${image.getUrl()}" create_time="${image.getCreated_at()}"/>
                     </div>
                 </c:forEach>
             </div>

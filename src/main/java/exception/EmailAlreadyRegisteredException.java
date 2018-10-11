@@ -5,10 +5,7 @@
  */
 package exception;
 
-import java.util.ResourceBundle;
-
 /**
- *
  * @author lucas
  */
 public class EmailAlreadyRegisteredException extends BaseException {
@@ -16,5 +13,5 @@ public class EmailAlreadyRegisteredException extends BaseException {
     public EmailAlreadyRegisteredException() {
         super(messages.getString("emailInUse"));
     }
-    
+
 }

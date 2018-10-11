@@ -2,7 +2,7 @@ package exception;
 
 import java.util.ResourceBundle;
 
-public class BaseException extends Exception {
+public abstract class BaseException extends Exception {
 
     protected static ResourceBundle messages;
 
@@ -10,7 +10,7 @@ public class BaseException extends Exception {
         messages = ResourceBundle.getBundle("Messages");
     }
 
-    BaseException (String message) {
+    protected BaseException(String message) {
         super(message);
     }
 }

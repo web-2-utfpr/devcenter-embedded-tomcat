@@ -5,12 +5,11 @@
  */
 package model.repository;
 
-import util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import util.HibernateUtil;
 
 /**
- *
  * @author rafae
  */
 public class Repository {
@@ -21,7 +20,7 @@ public class Repository {
     protected void beginSession() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
-    
+
     protected void closeSession() {
         if (session != null) {
             session.close();

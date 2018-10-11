@@ -1,19 +1,20 @@
 package servlet;
 
 import exception.InvalidImageException;
+import model.bean.Usuario;
+import model.repository.ImageRepository;
+import model.repository.UserRepository;
 import util.Context;
-import java.io.IOException;
+import util.FileHelper;
+import util.imgur.Uploader;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.bean.Usuario;
-import model.repository.ImageRepository;
-import model.repository.UserRepository;
-import util.FileHelper;
-import util.imgur.Uploader;
+import java.io.IOException;
 
 @WebServlet(
         name = "Profile",

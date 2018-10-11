@@ -8,7 +8,6 @@ package validator;
 import exception.InvalidUsernameException;
 
 /**
- *
  * @author rafae
  */
 public class UsernameValidator {

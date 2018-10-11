@@ -6,7 +6,6 @@
 package exception;
 
 /**
- *
  * @author lucas
  */
 public class UserAlreadyExistsException extends BaseException {

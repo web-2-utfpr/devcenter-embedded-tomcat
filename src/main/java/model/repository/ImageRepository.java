@@ -5,13 +5,13 @@
  */
 package model.repository;
 
-import java.util.ArrayList;
-import java.util.List;
 import model.bean.Image;
 import model.bean.Usuario;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author rafae
  */
 public class ImageRepository extends Repository {
@@ -30,11 +30,11 @@ public class ImageRepository extends Repository {
         return images;
     }
 
-    public long imageQuantity(){
+    public long imageQuantity() {
         long quantity;
         try {
             beginSession();
-            quantity = ((Long)session.createQuery("SELECT COUNT(*) FROM Image").uniqueResult()).intValue();
+            quantity = ((Long) session.createQuery("SELECT COUNT(*) FROM Image").uniqueResult()).intValue();
         } finally {
             closeSession();
         }

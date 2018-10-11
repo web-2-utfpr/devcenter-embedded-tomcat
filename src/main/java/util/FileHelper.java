@@ -2,9 +2,9 @@ package util;
 
 import exception.InvalidImageException;
 
+import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
-import javax.servlet.http.Part;
 
 public class FileHelper {
 

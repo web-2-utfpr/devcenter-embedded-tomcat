@@ -15,7 +15,7 @@ public class WebException extends RuntimeException {
      * Creates a new instance of WebException containing the StatusCode and the
      * original exception.
      *
-     * @param code The StatusCode related to this exception.
+     * @param code  The StatusCode related to this exception.
      * @param cause The Throwable that set off this exception.
      */
     public WebException(StatusCode code, Throwable cause) {
@@ -37,7 +37,7 @@ public class WebException extends RuntimeException {
      * the provided httpCode) and the original exception.
      *
      * @param httpCode The httpCode related to this exception.
-     * @param cause The Throwable that set off this exception.
+     * @param cause    The Throwable that set off this exception.
      */
     public WebException(int httpCode, Throwable cause) {
         this(StatusCode.getStatus(httpCode), cause);

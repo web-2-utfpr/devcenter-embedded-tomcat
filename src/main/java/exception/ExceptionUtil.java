@@ -5,15 +5,15 @@
  */
 package exception;
 
-import javax.ws.rs.core.Response;
 import org.json.JSONObject;
 
+import javax.ws.rs.core.Response;
+
 /**
- *
  * @author rafae
  */
 public class ExceptionUtil {
-    public static Response errorToResponse (Exception e) {
+    public static Response errorToResponse(Exception e) {
         JSONObject response = new JSONObject();
         response.put("error", e.getLocalizedMessage());
         return Response.status(Response.Status.BAD_REQUEST).entity(response.toString()).build();
