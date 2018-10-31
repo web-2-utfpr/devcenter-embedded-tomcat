@@ -2,11 +2,27 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
+
+
 <t:wrapper title="${user.getNome()}'s feed">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <jsp:body>
         <span class="red-text">${error}</span>
-        <h3>${user.getNome()}</h3>
-        <h6>${user.getEmail()}</h6>
+        <div class="container">
+                <div class="jumbotron">
+                  <h1>Perfil de Úsuário</h1>
+                  <h4>${user.getNome()}</h3>
+                  <h6>${user.getEmail()}</h6>  
+                </div>
+        </div>
+        <h4> Meus vídeos</h4>
+        <hr>
         <div class="photo-grid-container">
             <div class="photo-grid">
                 <c:forEach var="image" items="${images}">
