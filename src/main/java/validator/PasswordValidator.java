@@ -8,13 +8,12 @@ package validator;
 import exception.InvalidPasswordException;
 
 /**
- *
  * @author rafae
  */
 public class PasswordValidator {
     public static void isValid(String password) throws InvalidPasswordException {
         if (password == null || password.length() < 8) {
-            throw new InvalidPasswordException("Invalid Password");
+            throw new InvalidPasswordException();
         }
     }
 }

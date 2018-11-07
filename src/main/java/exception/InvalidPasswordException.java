@@ -1,9 +1,9 @@
 package exception;
 
-public class InvalidPasswordException extends Exception {
+public class InvalidPasswordException extends BaseException {
 
-    public InvalidPasswordException(String message) {
-        super(message);
+    public InvalidPasswordException() {
+        super(messages.getString("invalidPassword"));
     }
-    
+
 }

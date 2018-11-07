@@ -13,7 +13,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JWTUtil {
 
     private static String key;
-    
+
     static {
         key = System.getenv("JWT_SECRET");
         if (key == null) {

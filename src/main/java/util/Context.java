@@ -1,10 +1,11 @@
 package util;
 
-import java.io.IOException;
+import model.bean.Usuario;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.bean.Usuario;
+import java.io.IOException;
 
 public class Context {
 
@@ -34,7 +35,7 @@ public class Context {
     public void Dispatch(String page) throws ServletException, IOException {
         request.getRequestDispatcher(page).forward(request, response);
     }
-    
+
     public void Redirect(String page) throws IOException {
         response.sendRedirect(page);
     }

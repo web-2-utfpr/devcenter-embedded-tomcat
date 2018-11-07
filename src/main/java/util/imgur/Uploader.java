@@ -1,19 +1,14 @@
 package util.imgur;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import org.json.JSONObject;
+
+import javax.xml.bind.DatatypeConverter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.List;
-
-import javax.xml.bind.DatatypeConverter;
-import org.json.JSONObject;
 
 /**
  * Controls all interface with the web and the Imgur API.
@@ -111,7 +106,7 @@ public class Uploader {
     /**
      * Sends the provided message to the connection as uploaded data.
      *
-     * @param conn The connection to send the data to.
+     * @param conn    The connection to send the data to.
      * @param message The data to upload.
      */
     private static void writeToConnection(HttpURLConnection conn, String message) {
@@ -154,7 +149,7 @@ public class Uploader {
         }
 
         JSONObject jsonObj = new JSONObject(str.toString()).getJSONObject("data");
-        
+
         return jsonObj.getString("link");
     }
 }

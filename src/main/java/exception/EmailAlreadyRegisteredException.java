@@ -6,13 +6,12 @@
 package exception;
 
 /**
- *
  * @author lucas
  */
-public class EmailAlreadyRegisteredException extends Exception {
+public class EmailAlreadyRegisteredException extends BaseException {
 
-    public EmailAlreadyRegisteredException(String message) {
-        super(message);
+    public EmailAlreadyRegisteredException() {
+        super(messages.getString("emailInUse"));
     }
-    
+
 }

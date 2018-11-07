@@ -6,13 +6,12 @@
 package exception;
 
 /**
- *
  * @author lucas
  */
-public class UserNotFoundException extends Exception {
+public class UserNotFoundException extends BaseException {
 
-    public UserNotFoundException(String message) {
-        super(message);
+    public UserNotFoundException() {
+        super(messages.getString("userNotRegistered"));
     }
 
 }

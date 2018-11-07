@@ -1,5 +1,5 @@
-<%@page contentType="text/html" pageEncoding="utf-8"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@page contentType="text/html" pageEncoding="utf-8" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:wrapper title="Homepage">
     <jsp:body>
@@ -13,15 +13,15 @@
             <form action="login" method="POST" class="col form-login">
                 <div class="input-field row">
                     <label for="username">${labels["usernameLabel"]}</label>
-                    <input type="text" class="validate" name="username" id="username" required/>
+                    <input type="text" value="${username}" name="username" id="username" required/>
                 </div>
                 <div class="input-field row">
                     <label for="password">${labels["passwordLabel"]}</label>
-                    <input type="password" class="validate" name="password" id="password" required/>
+                    <input type="password" value="${password}" name="password" id="password" required/>
                 </div>
                 <div class="row card-action">
-                    <input type="reset" id="reset" value=${labels["reset"]} class="btn-flat grey-text">
-                    <input type="submit" value=${labels["login"]} class="btn green waves-light">
+                    <input type="reset" id="reset" value="${labels["reset"]}" class="btn-flat grey-text">
+                    <input type="submit" value="${labels["login"]}" class="btn green waves-light">
                 </div>
             </form>
         </div>

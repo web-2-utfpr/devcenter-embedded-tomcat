@@ -27,8 +27,8 @@ public enum StatusCode {
      * Creates a new StatusCode with provided description and http code.
      *
      * @param description A message that describes the status or what might have
-     * caused it.
-     * @param httpCode The Http response associated with this StatusCode.
+     *                    caused it.
+     * @param httpCode    The Http response associated with this StatusCode.
      */
     private StatusCode(String description, int httpCode) {
         this.description = description;

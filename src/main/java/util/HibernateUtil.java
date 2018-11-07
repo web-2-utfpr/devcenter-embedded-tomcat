@@ -5,11 +5,8 @@
  */
 package util;
 
-import java.util.HashMap;
-import java.util.Map;
 import model.bean.Image;
 import model.bean.Usuario;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -17,17 +14,19 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author imssbora
  */
 public class HibernateUtil {
 
-    private static StandardServiceRegistry registry;
-    private static SessionFactory sessionFactory;
-
     static String host;
     static String username;
     static String password;
+    private static StandardServiceRegistry registry;
+    private static SessionFactory sessionFactory;
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
@@ -36,7 +35,7 @@ public class HibernateUtil {
                 username = System.getenv("MYSQL_USER");
                 password = System.getenv("MYSQL_PASSWORD");
             } else {
-                host = "jdbc:mysql://192.168.99.100:3306/sql10233623?useSSL=false";
+                host = "jdbc:mysql://127.0.0.1:3306/heroku_bd771edd95de162?useSSL=false";
                 username = "root";
                 password = "root";
             }

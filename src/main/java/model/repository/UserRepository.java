@@ -5,14 +5,7 @@
  */
 package model.repository;
 
-import exception.EmailAlreadyRegisteredException;
-import exception.InvalidEmailException;
-import exception.InvalidPasswordException;
-import exception.InvalidUsernameException;
-import exception.UserAlreadyExistsException;
-import exception.UserNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import exception.*;
 import model.bean.Usuario;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,8 +15,10 @@ import validator.EmailValidator;
 import validator.PasswordValidator;
 import validator.UsernameValidator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author rafae
  */
 public class UserRepository extends Repository {
@@ -37,13 +32,13 @@ public class UserRepository extends Repository {
             List list = session.createQuery("FROM Usuario AS u WHERE u.nome = :nome").setParameter("nome", nome).list();
 
             if (!list.isEmpty()) {
-                throw new UserAlreadyExistsException("Username already registered");
+                throw new UserAlreadyExistsException();
             }
 
             list = session.createQuery("FROM Usuario AS u WHERE u.email = :email").setParameter("email", email).list();
 
             if (!list.isEmpty()) {
-                throw new EmailAlreadyRegisteredException("Email already registered");
+                throw new EmailAlreadyRegisteredException();
             }
 
             transaction = session.beginTransaction();
@@ -67,7 +62,7 @@ public class UserRepository extends Repository {
                 String token = JWTUtil.create(String.valueOf(user.getId()));
                 return token;
             } else {
-                throw new InvalidPasswordException("Invalid password");
+                throw new InvalidPasswordException();
             }
         } finally {
             closeSession();
@@ -81,7 +76,7 @@ public class UserRepository extends Repository {
             if (BCrypt.checkpw(senha, user.getSenha())) {
                 return user;
             } else {
-                throw new InvalidPasswordException("Invalid password");
+                throw new InvalidPasswordException();
             }
         } finally {
             closeSession();
@@ -111,7 +106,7 @@ public class UserRepository extends Repository {
                     .setParameter("nome", username)
                     .list();
             if (list.isEmpty()) {
-                throw new UserNotFoundException("User not found");
+                throw new UserNotFoundException();
             }
             return setUser(new JSONObject(list.get(0)));
         } finally {
@@ -126,7 +121,7 @@ public class UserRepository extends Repository {
                     .setParameter("id", id)
                     .list();
             if (list.isEmpty()) {
-                throw new UserNotFoundException("User not found");
+                throw new UserNotFoundException();
             }
             return setUser(new JSONObject(list.get(0)));
         } finally {

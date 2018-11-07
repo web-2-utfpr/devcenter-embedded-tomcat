@@ -6,13 +6,12 @@
 package exception;
 
 /**
- *
  * @author lucas
  */
-public class UserAlreadyExistsException extends Exception {
+public class UserAlreadyExistsException extends BaseException {
 
-    public UserAlreadyExistsException(String message) {
-        super(message);
+    public UserAlreadyExistsException() {
+        super(messages.getString("userAlreadyExists"));
     }
 
 }
