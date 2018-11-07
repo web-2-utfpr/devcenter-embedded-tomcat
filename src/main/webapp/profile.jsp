@@ -11,7 +11,7 @@
                   <h6>${user.getEmail()}</h6>  
                 </div>
         </div>
-        <h4> Meus vídeos</h4>
+        <h4>Minhas imagens</h4>
         <hr>
         <div class="photo-grid-container">
             <div class="photo-grid">
