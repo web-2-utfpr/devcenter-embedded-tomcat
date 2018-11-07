@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="center">
-            <a ${page > 0 ? "" : "style=\"display:none;\""} href="/feed?p=${page-1}" alt="${">
+            <a ${page > 0 ? "" : "style=\"display:none;\""} href="/feed?p=${page-1}">
                 
             <img src="https://png.icons8.com/color/1600/arrow" alt="https://png.icons8.com/color/1600/arrow" class="shrinkToFit transparent" width="30" height="30">
           
