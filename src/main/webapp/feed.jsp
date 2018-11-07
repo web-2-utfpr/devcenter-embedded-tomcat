@@ -17,9 +17,17 @@
                 </c:forEach>
             </div>
         </div>
-        <div>
-            <a ${page > 0 ? "" : "style=\"display:none;\""} href="/feed?p=${page-1}"><</a>
-            <a ${hasNextPage ? "" : "style=\"display:none;\""} href="/feed?p=${page+1}">></a>
+        <div class="center">
+            <a ${page > 0 ? "" : "style=\"display:none;\""} href="/feed?p=${page-1}" alt="${">
+                
+            <img src="https://png.icons8.com/color/1600/arrow" alt="https://png.icons8.com/color/1600/arrow" class="shrinkToFit transparent" width="30" height="30">
+          
+            </a>
+            <a ${hasNextPage ? "" : "style=\"display:none;\""} href="/feed?p=${page+1}">
+            
+            <img src="https://png.icons8.com/color/1600/left" alt="https://png.icons8.com/color/1600/arrow" class="shrinkToFit transparent" width="30" height="30">
+           
+            </a>
         </div>
     </jsp:body>
 </t:wrapper>
