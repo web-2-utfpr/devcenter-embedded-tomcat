@@ -5,8 +5,14 @@
 <t:wrapper title="${user.getNome()}'s feed">
     <jsp:body>
         <span class="red-text">${error}</span>
-        <h3>${user.getNome()}</h3>
-        <h6>${user.getEmail()}</h6>
+        <div class="container">
+                <div class="jumbotron">
+                  <h4>${user.getNome()}</h3>
+                  <h6>${user.getEmail()}</h6>  
+                </div>
+        </div>
+        <h4>Minhas imagens</h4>
+        <hr>
         <div class="photo-grid-container">
             <div class="photo-grid">
                 <c:forEach var="image" items="${images}">
